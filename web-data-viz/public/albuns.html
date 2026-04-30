@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ariana Grande | Discography</title>
+
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/albuns.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sacramento&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a class="logo" href="./index.html">ARIANA GRANDE</a>
+            <nav class="nav-links">
+                <a href="./index.html">INÍCIO</a>
+                <a class="active" href="./albuns.html">ÁLBUNS</a>
+                <a href="./premios.html">PRÊMIOS</a>
+                <a href="./quiz.html">QUIZ</a>
+                <a class="subscribe-btn" href="./cadastro.html">SUBSCRIBE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina-discografia">
+        <section class="cabecalho-discografia">
+            <h2>DISCOGRAPHY</h2>
+            <p>A musical journey through seven studio albums (and one waiting).</p>
+        </section>
+
+        <section id="lista_de_albuns" class="lista-de-albuns"></section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <h4>Feito com amor por aluna SPTech &hearts; 2026</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </footer>
+
+    <script>
+        let albuns = [
+            {
+                id: "yours-truly",
+                nome: "Yours Truly",
+                capa: "./img/Yours Truly.jpg",
+                ano: 2013,
+                musicaPopular: "The Way",
+                spotifyEmbed: "https://open.spotify.com/embed/track/1Onx2O64wzyA7ZzOsBBqBJ?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/1Onx2O64wzyA7ZzOsBBqBJ",
+                descricao: "Álbum de estreia que trouxe influências do R&B dos anos 90, com vocais impressionantes e uma vibe nostálgica. Apresentou Ariana ao mundo com sucessos como 'The Way' e 'Baby I'.",
+                classeFonte: "fonte-yours-truly",
+                corDestaque: "#ff8ca3",
+                corFundo: "#fff0f5" /* Rosa muito claro */
+            },
+            {
+                id: "my-everything",
+                nome: "My Everything",
+                capa: "./img/My Everything.jpg",
+                ano: 2014,
+                musicaPopular: "Problem",
+                spotifyEmbed: "https://open.spotify.com/embed/track/7fYbFYt7X4FZvuJJC90EX0?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/7fYbFYt7X4FZvuJJC90EX0",
+                descricao: "Segundo álbum que consolidou Ariana como uma força pop. Com hits como 'Problem', 'Break Free' e 'Love Me Harder', mostrou versatilidade e crescimento artístico.",
+                classeFonte: "fonte-my-everything",
+                corDestaque: "#333333",
+                corFundo: "#f5f5f5" /* Cinza muito claro */
+            },
+            {
+                id: "dangerous-woman",
+                nome: "Dangerous Woman",
+                capa: "./img/Dangerous Woman.jpg",
+                ano: 2016,
+                musicaPopular: "Into You",
+                spotifyEmbed: "https://open.spotify.com/embed/track/0cSzLH095wJXfZlByWg34k?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/0cSzLH095wJXfZlByWg34k",
+                descricao: "Marcou uma nova fase mais madura e empoderada. O título dita o tom; Ariana está no controle. 'Into You' e 'Side To Side' dominaram as paradas.",
+                classeFonte: "fonte-dangerous-woman",
+                corDestaque: "#111111",
+                corFundo: "#e8e8e8" /* Cinza suave */
+            },
+            {
+                id: "sweetener",
+                nome: "Sweetener",
+                capa: "./img/Sweetener.jpg",
+                ano: 2018,
+                musicaPopular: "no tears left to cry",
+                spotifyEmbed: "https://open.spotify.com/embed/track/62o5MymhGSxLRkkl4J5bg9?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/62o5MymhGSxLRkkl4J5bg9",
+                descricao: "Vencedor do Grammy, este álbum trouxe experimentação sonora com produção de Pharrell Williams. Músicas como 'no tears left to cry' e 'God is a woman' mostraram resiliência e evolução.",
+                classeFonte: "fonte-sweetener",
+                corDestaque: "#cba885",
+                corFundo: "#fdf5e6" /* Bege claro */
+            },
+            {
+                id: "thank-u-next",
+                nome: "thank u, next",
+                capa: "./img/thank_you_next.jpg",
+                ano: 2019,
+                musicaPopular: "7 rings",
+                spotifyEmbed: "https://open.spotify.com/embed/track/6ocbgoVGwYJhOv1GgI9NsF?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/6ocbgoVGwYJhOv1GgI9NsF",
+                descricao: "Um dos álbuns mais pessoais e bem-sucedidos, nascido de transformação pessoal. Quebrou recordes com '7 rings' e a faixa-título que se tornou um hino de empoderamento.",
+                classeFonte: "fonte-thank-u-next",
+                corDestaque: "#ff69b4",
+                corFundo: "#ffe4e1" /* Rosa suave */
+            },
+            {
+                id: "positions",
+                nome: "Positions",
+                capa: "./img/positions.jpg",
+                ano: 2020,
+                musicaPopular: "positions",
+                spotifyEmbed: "https://open.spotify.com/embed/track/35mvY5S1H3J2QZyna3TFe0?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/35mvY5S1H3J2QZyna3TFe0",
+                descricao: "Álbum intimista que explora amor e sensualidade com influências do R&B. Trouxe uma Ariana mais confiante e confortável com sua sexualidade e voz aveludada.",
+                classeFonte: "fonte-positions",
+                corDestaque: "#6e8b6e",
+                corFundo: "#e8f4e8" /* Verde suave */
+            },
+            {
+                id: "eternal-sunshine",
+                nome: "eternal sunshine",
+                capa: "./img/eternal sunshine - home page.jpg",
+                ano: 2024,
+                musicaPopular: "we can't be friends (wait for your love)",
+                spotifyEmbed: "https://open.spotify.com/embed/track/51ZQ1vr10ffzbwIjDCwqm4?utm_source=generator",
+                spotifyLink: "https://open.spotify.com/track/51ZQ1vr10ffzbwIjDCwqm4",
+                descricao: "Seu álbum mais recente e introspectivo, inspirado no filme 'Brilho Eterno de uma Mente sem Lembranças'. Explora temas de amor, perda, memória e cura emocional com uma sonoridade etérea e moderna.",
+                classeFonte: "fonte-eternal-sunshine",
+                corDestaque: "#b22222",
+                corFundo: "#ffebe6" /* Laranja/Vermelho claro */
+            },
+            {
+                id: "petal",
+                nome: "Petal",
+                capa: "./img/Petal - album ariana.jpg", 
+                ano: "TBA",
+                musicaPopular: "Em breve...",
+                spotifyEmbed: "",
+                spotifyLink: "#",
+                descricao: "Aguardando o novo álbum... Um novo capítulo cheio de surpresas na jornada musical de Ariana Grande.",
+                classeFonte: "fonte-petal",
+                corDestaque: "#ff8ca3",
+                corFundo: "#fff0f5" /* Rosa floral claro */
+            }
+        ];
+
+        let chaveLocalStorage = "avaliacoes_albuns_ariana";
+
+        function obterAvaliacoesSalvas() {
+            let avaliacoes = localStorage.getItem(chaveLocalStorage);
+            return avaliacoes ? JSON.parse(avaliacoes) : {};
+        }
+
+        function salvarAvaliacao(idAlbum, nota) {
+            let avaliacoes = obterAvaliacoesSalvas();
+            avaliacoes[idAlbum] = nota;
+            localStorage.setItem(chaveLocalStorage, JSON.stringify(avaliacoes));
+        }
+
+        function renderizarAlbuns() {
+            let avaliacoes = obterAvaliacoesSalvas();
+            let lista_de_albuns = document.getElementById("lista_de_albuns");
+            lista_de_albuns.innerHTML = "";
+
+            for (let i = 0; i < albuns.length; i++) {
+                let album = albuns[i];
+                let notaAtual = avaliacoes[album.id] || 0;
+                let card = document.createElement("article");
+
+                card.className = "caixa-album";
+                card.style.backgroundColor = album.corFundo; /* Cor de fundo dinamica */
+                
+                let htmlSpotify = "";
+                if (album.spotifyEmbed !== "") {
+                    htmlSpotify = `
+                        <div class="topo-previa-spotify">
+                            <span class="titulo-previa" style="color: ${album.corDestaque}">Spotify Preview</span>
+                            <a class="link-abrir-spotify" href="${album.spotifyLink}" target="_blank" style="color: ${album.corDestaque}">
+                                Open in Spotify
+                            </a>
+                        </div>
+                        <iframe
+                            class="player-spotify"
+                            src="${album.spotifyEmbed}"
+                            title="Previa da musica ${album.musicaPopular}"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                        </iframe>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="capa-album">
+                        <img src="${album.capa}" alt="Capa do album ${album.nome}">
+                    </div>
+
+                    <div class="informacoes-album">
+                        <span class="ano-lancamento">${album.ano}</span>
+                        <h3 class="titulo-album ${album.classeFonte}">${album.nome}</h3>
+                        
+                        <p class="descricao-album">${album.descricao}</p>
+
+                        <div class="area-avaliacao-spotify">
+                            <div class="bloco-avaliacao">
+                                <span class="rotulo-avaliacao" style="color: ${album.corDestaque}">Rate this album:</span>
+                                <div class="botoes-estrela" id="estrelas_${album.id}"></div>
+                            </div>
+                        </div>
+                        
+                        ${htmlSpotify}
+                    </div>
+                `;
+
+                lista_de_albuns.appendChild(card);
+                renderizarEstrelas(album.id, notaAtual, album.corDestaque);
+            }
+        }
+
+        function renderizarEstrelas(idAlbum, notaAtual, corDestaque) {
+            let container = window["estrelas_" + idAlbum];
+            container.innerHTML = "";
+
+            for (let estrela = 1; estrela <= 5; estrela++) {
+                let botao = document.createElement("button");
+                botao.innerHTML = "&#9733;";
+                if (estrela <= notaAtual) {
+                    botao.style.color = corDestaque;
+                    botao.className = "estrela ativa";
+                } else {
+                    botao.style.color = "#ccc";
+                    botao.className = "estrela";
+                }
+                botao.onclick = function () {
+                    definirNota(idAlbum, estrela, corDestaque);
+                };
+                container.appendChild(botao);
+            }
+        }
+
+        function definirNota(idAlbum, notaClicada, corDestaque) {
+            let avaliacoes = obterAvaliacoesSalvas();
+            let notaAtual = avaliacoes[idAlbum] || 0;
+            let novaNota = notaAtual === notaClicada ? 0 : notaClicada;
+
+            salvarAvaliacao(idAlbum, novaNota);
+            renderizarEstrelas(idAlbum, novaNota, corDestaque);
+        }
+
+        renderizarAlbuns();
+    </script>
+</body>
+
+</html>

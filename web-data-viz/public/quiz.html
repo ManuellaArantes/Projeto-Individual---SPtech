@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoAriana | Quiz</title>
+
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/quiz.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+    <!-- Cabecalho compartilhado do site -->
+    <header class="header">
+        <div class="header-container">
+            <a class="logo" href="./index.html">ARIANA GRANDE</a>
+            <nav class="nav-links">
+                <a href="./index.html">INÍCIO</a>
+                <a href="./albuns.html">ÁLBUNS</a>
+                <a href="./premios.html">PRÊMIOS</a>
+                <a class="active" href="./quiz.html">QUIZ</a>
+                <a class="subscribe-btn" href="./cadastro.html">SUBSCRIBE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="quiz-page">
+        <!-- Bloco de apresentacao do quiz -->
+        <section class="quiz-hero">
+            <p class="quiz-kicker">Quiz de personalidade</p>
+            <h2>Qual album da Ariana Grande combina com voce?</h2>
+            <p>
+                Responda as 15 perguntas e descubra qual era da Ariana mais combina com sua forma
+                de amar, sentir, reagir e crescer.
+            </p>
+        </section>
+
+        <!-- Bloco onde as perguntas serao criadas pelo JavaScript -->
+        <section class="quiz-card">
+            <div class="quiz-topo-card">
+                <h3>Responda com sinceridade</h3>
+                <span class="quiz-total">15 perguntas</span>
+            </div>
+
+            <form class="quiz-formulario"></form>
+
+            <div class="quiz-acoes">
+                <button class="botao" type="button" onclick="finalizarQuiz()">Ver resultado</button>
+                <button class="botao botao-secundario" type="button" onclick="reiniciarQuiz()">Refazer</button>
+            </div>
+        </section>
+
+        <!-- Bloco onde o resultado final aparece -->
+        <section class="quiz-resultado oculto">
+            <p class="resultado-kicker">Seu resultado</p>
+            <h3 class="resultado-album"></h3>
+            <div class="resultado-capa">
+                <img class="resultado-capa-img" src="" alt="Capa do album resultado do quiz">
+            </div>
+            <p class="resultado-album-completo"></p>
+            <p class="resultado-significado"></p>
+
+            <div class="resultado-pontos"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <h4>Feito com amor por aluna SPTech &hearts; 2026</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </footer>
+
+    <script>
+        /*
+            Dados principais do quiz.
+            Cada pergunta tem 4 respostas e cada resposta soma pontos em dois albuns.
+        */
+        let perguntas = [
+            {
+                titulo: "1. Como voce ama?",
+                opcoes: [
+                    { letra: "A", texto: "Entrego tudo, acredito em amor puro", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Amo intensamente, mesmo sendo complicado", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Amo com confianca e desejo", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Amo com consciencia e maturidade", forte: "POS", secundaria: "ES" }
+                ]
+            },
+            {
+                titulo: "2. Como voce reage a decepcoes?",
+                opcoes: [
+                    { letra: "A", texto: "Fico triste, mas continuo acreditando", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Tento seguir em frente rapido", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Me fortaleço e nao volto atras", forte: "DW", secundaria: "TUN" },
+                    { letra: "D", texto: "Reflito, aprendo e evoluo", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "3. Sua energia atual:",
+                opcoes: [
+                    { letra: "A", texto: "Leve e sonhadora", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Intensa e caotica", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Poderosa e segura", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Calma e introspectiva", forte: "ES", secundaria: "POS" }
+                ]
+            },
+            {
+                titulo: "4. O que mais te define?",
+                opcoes: [
+                    { letra: "A", texto: "Emocao", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Adaptacao", forte: "ME", secundaria: "POS" },
+                    { letra: "C", texto: "Independencia", forte: "DW", secundaria: "TUN" },
+                    { letra: "D", texto: "Consciencia emocional", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "5. Em um relacionamento, voce:",
+                opcoes: [
+                    { letra: "A", texto: "Idealiza muito", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Vive intensamente o presente", forte: "ME", secundaria: "POS" },
+                    { letra: "C", texto: "Se coloca em primeiro lugar", forte: "DW", secundaria: "TUN" },
+                    { letra: "D", texto: "Busca equilibrio e crescimento", forte: "POS", secundaria: "ES" }
+                ]
+            },
+            {
+                titulo: "6. Seu maior aprendizado na vida:",
+                opcoes: [
+                    { letra: "A", texto: "Amar e arriscar", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Nem tudo dura, e tudo bem", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Eu sou suficiente sozinha", forte: "DW", secundaria: "TUN" },
+                    { letra: "D", texto: "Tudo faz parte da evolucao", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "7. Sua estetica:",
+                opcoes: [
+                    { letra: "A", texto: "Delicada, romantica, vintage", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Versatil, trendy, mutavel", forte: "ME", secundaria: "POS" },
+                    { letra: "C", texto: "Sexy, dark, marcante", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Clean, sofisticada, introspectiva", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "8. Como voce lida com sua propria mente?",
+                opcoes: [
+                    { letra: "A", texto: "Sinto tudo profundamente", forte: "YT", secundaria: "TUN" },
+                    { letra: "B", texto: "Oscilo bastante", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Tento manter controle", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Observo e analiso meus sentimentos", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "9. Escolha uma frase:",
+                opcoes: [
+                    { letra: "A", texto: "Quero amar sem medo", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Estou vivendo varias versoes de mim", forte: "ME", secundaria: "POS" },
+                    { letra: "C", texto: "Eu sei exatamente quem eu sou", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Estou me entendendo melhor a cada dia", forte: "ES", secundaria: "TUN" }
+                ]
+            },
+            {
+                titulo: "10. Seu momento atual:",
+                opcoes: [
+                    { letra: "A", texto: "Primeiros amores e sentimentos intensos", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Mudancas e descobertas", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Autoconfianca e poder pessoal", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Reflexao e reconstrucao interna", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "11. Como voce lida com mudancas?",
+                opcoes: [
+                    { letra: "A", texto: "Tenho dificuldade, me apego ao que sinto", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Me adapto, mesmo que seja confuso", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Uso a mudanca a meu favor", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Vejo como parte do crescimento", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "12. O que mais te atrai em alguem?",
+                opcoes: [
+                    { letra: "A", texto: "Carinho e conexao emocional", forte: "YT", secundaria: "POS" },
+                    { letra: "B", texto: "Intensidade e emocao", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Confianca e atitude", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Profundidade e compreensao", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "13. Seu maior medo:",
+                opcoes: [
+                    { letra: "A", texto: "Nao ser amada da mesma forma", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Perder momentos importantes", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Perder o controle da propria vida", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Nao se entender completamente", forte: "ES", secundaria: "SW" }
+                ]
+            },
+            {
+                titulo: "14. Como voce se ve hoje?",
+                opcoes: [
+                    { letra: "A", texto: "Sensivel e apaixonada", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Em constante mudanca", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Forte e independente", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Evoluindo e me conhecendo melhor", forte: "ES", secundaria: "POS" }
+                ]
+            },
+            {
+                titulo: "15. Qual dessas vibes voce mais gosta?",
+                opcoes: [
+                    { letra: "A", texto: "Amor leve e doce", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Emocoes intensas e imprevisiveis", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Poder, confianca e sensualidade", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Paz, profundidade e autoconhecimento", forte: "ES", secundaria: "SW" }
+                ]
+            }
+        ];
+
+        /*
+            Informacoes finais de cada album.
+            Esse bloco serve para mostrar o nome completo e o significado no resultado.
+        */
+        let albuns = {
+            YT: {
+                nome: "Yours Truly",
+                significado: "amor puro, inicio emocional",
+                capa: "./img/Yours Truly.jpg"
+            },
+            ME: {
+                nome: "My Everything",
+                significado: "intensidade e caos emocional",
+                capa: "./img/My Everything.jpg"
+            },
+            DW: {
+                nome: "Dangerous Woman",
+                significado: "poder e identidade",
+                capa: "./img/Dangerous Woman.jpg"
+            },
+            SW: {
+                nome: "Sweetener",
+                significado: "cura e leveza",
+                capa: "./img/Sweetener.jpg"
+            },
+            TUN: {
+                nome: "Thank U, Next",
+                significado: "superacao e independencia",
+                capa: "./img/thank_you_next.jpg"
+            },
+            POS: {
+                nome: "Positions",
+                significado: "amor maduro e intimidade",
+                capa: "./img/positions.jpg"
+            },
+            ES: {
+                nome: "Eternal Sunshine",
+                significado: "profundidade e autoconhecimento",
+                capa: "./img/eternal-sunshine-album.jpg"
+            }
+        };
+
+        /*
+            Cria todas as perguntas do quiz na tela.
+            Assim o HTML fica menor e mais facil de editar.
+        */
+        function renderizarPerguntas() {
+            let formulario = document.querySelector(".quiz-formulario");
+            formulario.innerHTML = "";
+
+            for (let i = 0; i < perguntas.length; i++) {
+                let pergunta = perguntas[i];
+                let bloco = document.createElement("article");
+
+                bloco.className = "pergunta-card";
+                bloco.innerHTML = `
+                    <h4>${pergunta.titulo}</h4>
+                    <div class="pergunta-opcoes"></div>
+                `;
+
+                formulario.appendChild(bloco);
+
+                let opcoesContainer = bloco.querySelector(".pergunta-opcoes");
+
+                for (let j = 0; j < pergunta.opcoes.length; j++) {
+                    let opcao = pergunta.opcoes[j];
+                    let alternativa = document.createElement("label");
+
+                    alternativa.className = "opcao";
+                    alternativa.innerHTML = `
+                        <input type="radio" name="pergunta_${i}" value="${j}">
+                        <span><strong>${opcao.letra})</strong> ${opcao.texto}</span>
+                    `;
+
+                    opcoesContainer.appendChild(alternativa);
+                }
+            }
+        }
+
+        /*
+            Lê as respostas marcadas e soma os pontos de cada album.
+        */
+        function calcularPontuacao() {
+            let pontos = {
+                YT: 0,
+                ME: 0,
+                DW: 0,
+                SW: 0,
+                TUN: 0,
+                POS: 0,
+                ES: 0
+            };
+
+            for (let i = 0; i < perguntas.length; i++) {
+                let respostaMarcada = document.querySelector(`input[name="pergunta_${i}"]:checked`);
+
+                if (!respostaMarcada) {
+                    return null;
+                }
+
+                let opcaoEscolhida = perguntas[i].opcoes[Number(respostaMarcada.value)];
+                pontos[opcaoEscolhida.forte] += 2;
+                pontos[opcaoEscolhida.secundaria] += 1;
+            }
+
+            return pontos;
+        }
+
+        /*
+            Resolve empates usando as regras passadas no enunciado.
+            O criterio da TUN foi mantido como prioridade em empate,
+            porque ela representa superacao e independencia.
+        */
+        function resolverEmpate(empatados) {
+            if (empatados.includes("TUN")) {
+                return "TUN";
+            }
+
+            if (empatados.includes("YT") && empatados.includes("ME")) {
+                return "YT";
+            }
+
+            if (empatados.includes("DW") && empatados.includes("POS")) {
+                return "DW";
+            }
+
+            if (empatados.includes("SW") && empatados.includes("ES")) {
+                return "ES";
+            }
+
+            return empatados[0];
+        }
+
+        /*
+            Descobre qual album venceu com base na pontuacao final.
+        */
+        function descobrirAlbumFinal(pontos) {
+            let chaves = Object.keys(pontos);
+            let maiorPontuacao = 0;
+
+            for (let i = 0; i < chaves.length; i++) {
+                if (pontos[chaves[i]] > maiorPontuacao) {
+                    maiorPontuacao = pontos[chaves[i]];
+                }
+            }
+
+            let empatados = [];
+
+            for (let i = 0; i < chaves.length; i++) {
+                if (pontos[chaves[i]] === maiorPontuacao) {
+                    empatados.push(chaves[i]);
+                }
+            }
+
+            if (empatados.length === 1) {
+                return empatados[0];
+            }
+
+            return resolverEmpate(empatados);
+        }
+
+        /*
+            Mostra o resultado na tela com o album vencedor e o placar completo.
+        */
+        function mostrarResultado(albumFinal, pontos) {
+            let resultado = document.querySelector(".quiz-resultado");
+            let titulo = document.querySelector(".resultado-album");
+            let capa = document.querySelector(".resultado-capa-img");
+            let nomeCompleto = document.querySelector(".resultado-album-completo");
+            let significado = document.querySelector(".resultado-significado");
+            let placar = document.querySelector(".resultado-pontos");
+            let chaves = Object.keys(pontos);
+
+            titulo.textContent = albuns[albumFinal].nome;
+            capa.src = albuns[albumFinal].capa;
+            capa.alt = "Capa do album " + albuns[albumFinal].nome;
+            nomeCompleto.textContent = "Album completo: " + albuns[albumFinal].nome;
+            significado.textContent = "Seu resultado combina com " + albuns[albumFinal].significado + ".";
+            placar.innerHTML = "";
+
+            for (let i = 0; i < chaves.length; i++) {
+                let item = document.createElement("div");
+                item.className = "placar-item";
+                item.innerHTML = `
+                    <div class="placar-capa">
+                        <img src="${albuns[chaves[i]].capa}" alt="Capa do album ${albuns[chaves[i]].nome}">
+                    </div>
+                    <span class="placar-nome">${albuns[chaves[i]].nome}</span>
+                    <span class="placar-valor">${pontos[chaves[i]]} pts</span>
+                `;
+                placar.appendChild(item);
+            }
+
+            resultado.classList.remove("oculto");
+            resultado.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        /*
+            Funcao chamada no botao principal para validar e finalizar o quiz.
+        */
+        function finalizarQuiz() {
+            let pontos = calcularPontuacao();
+
+            if (!pontos) {
+                alert("Responda todas as perguntas antes de ver o resultado.");
+                return;
+            }
+
+            let albumFinal = descobrirAlbumFinal(pontos);
+            mostrarResultado(albumFinal, pontos);
+        }
+
+        /*
+            Limpa todas as respostas e esconde o resultado para o usuario tentar de novo.
+        */
+        function reiniciarQuiz() {
+            let radios = document.querySelectorAll('input[type="radio"]');
+            let resultado = document.querySelector(".quiz-resultado");
+
+            for (let i = 0; i < radios.length; i++) {
+                radios[i].checked = false;
+            }
+
+            resultado.classList.add("oculto");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        renderizarPerguntas();
+    </script>
+</body>
+
+</html>

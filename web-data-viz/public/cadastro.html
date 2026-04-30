@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ariana World | Cadastro</title>
+
+  <script src="./js/sessao.js"></script>
+  <link rel="stylesheet" href="./css/estilo.css">
+  <link rel="icon" href="./assets/icon/favicon2.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a class="logo" href="./index.html">ARIANA GRANDE</a>
+            <nav class="nav-links">
+                <a href="./index.html">INÍCIO</a>
+                <a href="./albuns.html">ÁLBUNS</a>
+                <a href="./premios.html">PRÊMIOS</a>
+                <a href="./quiz.html">QUIZ</a>
+                <a class="subscribe-btn" href="./cadastro.html">SUBSCRIBE</a>
+            </nav>
+        </div>
+    </header>
+
+  <main class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card card-cadastro">
+        <h2>Crie sua conta</h2>
+
+        <div class="formulario">
+          <div class="campo">
+            <span>Nome</span>
+            <input id="nome_input" type="text" placeholder="Seu nome">
+          </div>
+
+          <div class="campo">
+            <span>E-mail</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com">
+          </div>
+
+          <div class="campo">
+            <span>Senha</span>
+            <input id="senha_input" type="password" placeholder="******">
+          </div>
+
+          <div class="campo">
+            <span>Confirmacao da senha</span>
+            <input id="confirmacao_senha_input" type="password" placeholder="******">
+          </div>
+
+          <button class="botao" onclick="cadastrar()">Cadastrar</button>
+        </div>
+
+        <div id="div_aguardar" class="loading-div">
+          <img src="./assets/circle-loading.gif" id="loading-gif">
+        </div>
+
+        <div id="div_erros_login"></div>
+
+        <p class="auth-switch">
+          Ja tem uma conta?
+          <a href="./login.html">Faca o login</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <h4>Feito com amor por aluna SPTech &hearts; 2026</h4>
+      <span class="version">v1.0.0</span>
+    </div>
+  </footer>
+</body>
+
+</html>
+
+<script>
+  function cadastrar() {
+    aguardar();
+
+    let nomeVar = nome_input.value.trim();
+    let emailVar = email_input.value.trim();
+    let senhaVar = senha_input.value;
+    let confirmacaoSenhaVar = confirmacao_senha_input.value;
+    let idEmpresaVincular = 1;
+
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Preencha todos os campos.";
+      finalizarAguardar();
+      return false;
+    }
+
+    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Digite um e-mail valido.";
+      finalizarAguardar();
+      return false;
+    }
+
+    if (senhaVar.length < 6) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
+      finalizarAguardar();
+      return false;
+    }
+
+    if (senhaVar != confirmacaoSenhaVar) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "As senhas nao coincidem.";
+      finalizarAguardar();
+      return false;
+    }
+
+    setTimeout(sumirMensagem, 5000);
+
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        idEmpresaVincularServer: idEmpresaVincular
+      })
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para o login...";
+          limparFormulario();
+          finalizarAguardar();
+
+          setTimeout(function () {
+            window.location = "login.html";
+          }, 2000);
+        } else {
+          return resposta.text().then(function (texto) {
+            throw texto;
+          });
+        }
+      })
+      .catch(function (erro) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = erro || "Houve um erro ao realizar o cadastro.";
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  function limparFormulario() {
+    nome_input.value = "";
+    email_input.value = "";
+    senha_input.value = "";
+    confirmacao_senha_input.value = "";
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

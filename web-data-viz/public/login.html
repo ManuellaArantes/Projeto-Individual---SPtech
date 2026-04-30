@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ariana World | Login</title>
+
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a class="logo" href="./index.html">ARIANA GRANDE</a>
+            <nav class="nav-links">
+                <a href="./index.html">INÍCIO</a>
+                <a href="./albuns.html">ÁLBUNS</a>
+                <a href="./premios.html">PRÊMIOS</a>
+                <a href="./quiz.html">QUIZ</a>
+                <a class="subscribe-btn" href="./cadastro.html">SUBSCRIBE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="login">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card card-login">
+                <h2>Ola de volta!</h2>
+
+                <div class="formulario">
+                    <div class="campo">
+                        <span>E-mail</span>
+                        <input id="email_input" type="text" placeholder="Seu e-mail">
+                    </div>
+
+                    <div class="campo">
+                        <span>Senha</span>
+                        <input id="senha_input" type="password" placeholder="******">
+                    </div>
+
+                    <button class="botao" onclick="entrar()">Entrar</button>
+                </div>
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
+
+                <div id="div_erros_login"></div>
+
+                <p class="auth-switch">
+                    Ainda nao tem uma conta?
+                    <a href="./cadastro.html">Faca seu cadastro</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <h4>Feito com amor por aluna SPTech &hearts; 2026</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    function entrar() {
+        aguardar();
+
+        let emailVar = email_input.value;
+        let senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Preencha todos os campos.";
+            finalizarAguardar();
+            return false;
+        } else {
+            setTimeout(sumirMensagem, 5000);
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (json) {
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios);
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000);
+                });
+            } else {
+                resposta.text().then(function (texto) {
+                    finalizarAguardar(texto);
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            finalizarAguardar("Houve um erro ao realizar o login.");
+        });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+</script>
