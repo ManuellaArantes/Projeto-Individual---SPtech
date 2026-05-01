@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ariana Grande | Discography</title>
+    <title>Ariana Grande | Discografia</title>
 
     <script src="./js/sessao.js"></script>
     <link rel="stylesheet" href="./css/estilo.css">
@@ -25,15 +25,15 @@
                 <a href="./premios.html">PRÊMIOS</a>
                 <a href="./quiz.html">QUIZ</a>
                 <a class="link-dashboard" href="./dashboard/cards.html" style="display:none;">DASHBOARD</a>
-                <a class="subscribe-btn link-auth" href="./cadastro.html">SUBSCRIBE</a>
+                <a class="subscribe-btn link-auth" href="./cadastro.html">CADASTRO</a>
             </nav>
         </div>
     </header>
 
     <main class="pagina-discografia">
         <section class="cabecalho-discografia">
-            <h2>DISCOGRAPHY</h2>
-            <p>A musical journey through seven studio albums (and one waiting).</p>
+            <h2>DISCOGRAFIA</h2>
+            <p>Uma jornada musical pelos álbuns de estúdio da Ariana Grande.</p>
         </section>
 
         <section id="lista_de_albuns" class="lista-de-albuns"></section>
@@ -41,8 +41,7 @@
 
     <footer class="footer">
         <div class="container footer-content">
-            <h4>Feito com amor por aluna SPTech &hearts; 2026</h4>
-            <span class="version">v1.0.0</span>
+            <h4>Feito por Manuella &hearts; 2026</h4>
         </div>
     </footer>
 
@@ -179,14 +178,15 @@
 
                 card.className = "caixa-album";
                 card.style.backgroundColor = album.corFundo; /* Cor de fundo dinamica */
+                card.dataset.corFundo = album.corFundo;
                 
                 let htmlSpotify = "";
                 if (album.spotifyEmbed !== "") {
                     htmlSpotify = `
                         <div class="topo-previa-spotify">
-                            <span class="titulo-previa" style="color: ${album.corDestaque}">Spotify Preview</span>
+                            <span class="titulo-previa" style="color: ${album.corDestaque}">Prévia no Spotify</span>
                             <a class="link-abrir-spotify" href="${album.spotifyLink}" target="_blank" style="color: ${album.corDestaque}">
-                                Open in Spotify
+                                Abrir no Spotify
                             </a>
                         </div>
                         <iframe
@@ -211,7 +211,7 @@
 
                         <div class="area-avaliacao-spotify">
                             <div class="bloco-avaliacao">
-                                <span class="rotulo-avaliacao" style="color: ${album.corDestaque}">Rate this album:</span>
+                                <span class="rotulo-avaliacao" style="color: ${album.corDestaque}">Avalie este álbum:</span>
                                 <div class="botoes-estrela" id="estrelas_${album.id}"></div>
                             </div>
                         </div>
@@ -222,6 +222,26 @@
 
                 lista_de_albuns.appendChild(card);
                 renderizarEstrelas(album.id, notaAtual, album.corDestaque);
+            }
+
+            atualizarFundoPorAlbum();
+        }
+
+        function atualizarFundoPorAlbum() {
+            let observer = new IntersectionObserver(function (entradas) {
+                for (let i = 0; i < entradas.length; i++) {
+                    if (entradas[i].isIntersecting) {
+                        document.body.style.backgroundColor = entradas[i].target.dataset.corFundo;
+                    }
+                }
+            }, {
+                threshold: 0.45
+            });
+
+            let cards = document.querySelectorAll(".caixa-album");
+
+            for (let i = 0; i < cards.length; i++) {
+                observer.observe(cards[i]);
             }
         }
 

@@ -52,7 +52,7 @@ function atualizarCabecalho() {
                 return false;
             };
         } else {
-            linkAuth.textContent = "SUBSCRIBE";
+            linkAuth.textContent = "CADASTRO";
             linkAuth.href = obterCaminhoPagina("cadastro.html");
             linkAuth.onclick = null;
         }
