@@ -1,0 +1,148 @@
+.page-cadastro {
+    background:
+        radial-gradient(circle at top left, rgba(255, 145, 186, 0.18), transparent 28%),
+        radial-gradient(circle at 80% 12%, rgba(255, 204, 224, 0.12), transparent 24%),
+        linear-gradient(180deg, #151216 0%, #111111 100%);
+}
+
+.page-login {
+    background:
+        radial-gradient(circle at top left, rgba(176, 207, 179, 0.18), transparent 28%),
+        radial-gradient(circle at 80% 16%, rgba(232, 224, 197, 0.16), transparent 24%),
+        linear-gradient(180deg, #1f241f 0%, #171a17 100%);
+}
+
+.auth-layout {
+    position: relative;
+}
+
+.card-cadastro,
+.card-login {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-cadastro {
+    background: linear-gradient(180deg, rgba(255, 244, 248, 0.98) 0%, rgba(255, 235, 242, 0.96) 100%);
+    border-color: rgba(255, 167, 203, 0.52);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.28);
+}
+
+.card-login {
+    background: linear-gradient(180deg, rgba(248, 246, 236, 0.98) 0%, rgba(236, 231, 213, 0.96) 100%);
+    border-color: rgba(194, 188, 151, 0.56);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.24);
+}
+
+.card-cadastro::before,
+.card-login::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.card-cadastro::before {
+    background: linear-gradient(135deg, rgba(255, 197, 220, 0.22) 0%, transparent 36%, rgba(36, 19, 30, 0.08) 100%);
+}
+
+.card-login::before {
+    background: linear-gradient(135deg, rgba(216, 219, 188, 0.18) 0%, transparent 36%, rgba(108, 123, 108, 0.12) 100%);
+}
+
+.era-kicker {
+    margin: 0 0 8px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.card-cadastro .era-kicker {
+    color: #dd6f9d;
+}
+
+.card-login .era-kicker {
+    color: #7a866f;
+}
+
+.era-frase {
+    margin: -8px 0 20px;
+    text-align: center;
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.card-cadastro .era-frase {
+    color: #32212d;
+}
+
+.card-login .era-frase {
+    color: #566251;
+}
+
+.card-cadastro h2 {
+    color: #171317;
+    text-shadow: none;
+}
+
+.card-login h2 {
+    color: #2f3a2f;
+}
+
+.card-cadastro .campo span {
+    color: #5b3e4b;
+}
+
+.card-login .campo span {
+    color: #616a59;
+}
+
+.card-cadastro .campo input {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(255, 166, 203, 0.88);
+    color: #281923;
+}
+
+.card-login .campo input {
+    background: rgba(255, 255, 255, 0.84);
+    border-color: rgba(186, 183, 150, 0.92);
+    color: #2d332c;
+}
+
+.card-cadastro .campo input:focus {
+    outline-color: rgba(255, 131, 188, 0.24);
+    border-color: #eb7aaa;
+}
+
+.card-login .campo input:focus {
+    outline-color: rgba(142, 152, 128, 0.24);
+    border-color: #8d987f;
+}
+
+.card-cadastro .botao {
+    background: linear-gradient(135deg, #2b232a 0%, #4b3744 48%, #f58db4 100%);
+    box-shadow: 0 16px 34px rgba(65, 32, 51, 0.28);
+}
+
+.card-login .botao {
+    background: linear-gradient(135deg, #6f7e69 0%, #4f5a4b 48%, #2f382d 100%);
+    box-shadow: 0 16px 34px rgba(63, 71, 57, 0.24);
+}
+
+.card-cadastro .auth-switch {
+    color: #6d5362;
+}
+
+.card-login .auth-switch {
+    color: #6a7263;
+}
+
+.card-cadastro .auth-switch a {
+    color: #271820;
+}
+
+.card-login .auth-switch a {
+    color: #334031;
+}
