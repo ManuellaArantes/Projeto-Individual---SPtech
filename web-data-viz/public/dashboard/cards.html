@@ -8,116 +8,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoAriana | Dashboard</title>
 
-
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-
+    <link rel="stylesheet" href="./../css/estilo.css">
+    <link rel="stylesheet" href="./../css/dashboard-ariana.css">
     <script src="../js/sessao.js"></script>
-    <script src="../js/alerta.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
-
-    <div class="janela">
-
-        <div class="header-left dash-header">
-
-            <a class="dashboard-brand" href="../index.html">
-                <img src="../img/Ariana logo.jpg" alt="Logo do site InfoAriana">
-                <h1>InfoAriana</h1>
+<body onload="carregarDashboard()">
+    <header class="header">
+        <div class="container header-content">
+            <a class="brand brand-home" href="../index.html">
+                <img class="brand-logo" src="../img/Ariana logo.jpg" alt="Logo do site InfoAriana">
+                <h1 class="brand-title">InfoAriana</h1>
             </a>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-
-            <div class="btn-nav">
-                <h3>Aquários</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
         </div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
+        <nav class="menu-dropdown">
+            <a href="../index.html">Inicio</a>
+            <a href="../albuns.html">Albuns</a>
+            <a href="../premios.html">Premios</a>
+            <a href="../quiz.html">Quiz</a>
+            <a class="ativo" href="./cards.html">Dashboard</a>
+            <a class="menu-cta" href="../cadastro.html">Cadastrar</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-page">
+        <section class="dashboard-hero">
+            <h2>Dashboard da Ariana</h2>
+            <p>
+                Aqui aparecem o ultimo resultado salvo do seu quiz e um grafico simples sobre a popularidade da Ariana Grande.
+            </p>
+        </section>
+
+        <div class="dashboard-grid">
+            <section class="dashboard-card">
+                <h3>Seu desempenho no quiz</h3>
+                <p>Esse grafico mostra quantos pontos voce fez em cada album no seu ultimo resultado salvo.</p>
+
+                <div class="resumo-usuario">
+                    <div class="resumo-item">
+                        <strong class="nome-usuario">-</strong>
+                        <span>Usuario logado</span>
                     </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
+
+                    <div class="resumo-item">
+                        <strong class="album-final">-</strong>
+                        <span>Album vencedor</span>
                     </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
+
+                    <div class="resumo-item">
+                        <strong class="data-resultado">-</strong>
+                        <span>Ultimo resultado</span>
                     </div>
                 </div>
+
+                <div class="grafico-box">
+                    <canvas class="grafico-quiz"></canvas>
+                </div>
+            </section>
+
+            <div class="dashboard-lado">
+                <section class="dashboard-card">
+                    <h3>Album que mais combina com voce</h3>
+                    <div class="bloco-resultado"></div>
+                </section>
+
+                <section class="dashboard-card">
+                    <h3>Popularidade da Ariana Grande</h3>
+                    <p>Grafico simples com numeros gerais de carreira para enriquecer a dashboard.</p>
+
+                    <div class="grafico-box">
+                        <canvas class="grafico-popularidade"></canvas>
+                    </div>
+                </section>
             </div>
-
-            <div class="cards" id="cardAquarios">
-
-            </div>
-
         </div>
+    </main>
 
-    </div>
+    <footer class="footer">
+        <div class="container footer-content">
+            <h4>Feito com amor por aluna SPTech &hearts; 2026</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </footer>
 
+    <script>
+        let albuns = {
+            "Yours Truly": { capa: "../img/Yours Truly.jpg" },
+            "My Everything": { capa: "../img/My Everything.jpg" },
+            "Dangerous Woman": { capa: "../img/Dangerous Woman.jpg" },
+            "Sweetener": { capa: "../img/Sweetener.jpg" },
+            "Thank U, Next": { capa: "../img/thank_you_next.jpg" },
+            "Positions": { capa: "../img/positions.jpg" },
+            "Eternal Sunshine": { capa: "../img/eternal-sunshine-album.jpg" }
+        };
+
+        let graficoQuiz = null;
+        let graficoPopularidade = null;
+
+        function carregarDashboard() {
+            validarSessao();
+            document.querySelector(".nome-usuario").textContent = sessionStorage.NOME_USUARIO;
+            carregarUltimoResultado();
+            montarGraficoPopularidade();
+        }
+
+        function carregarUltimoResultado() {
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            fetch(`/resultados-quiz/ultimo/${idUsuario}`)
+                .then(function (resposta) {
+                    if (resposta.status == 204) {
+                        mostrarSemResultado();
+                        return null;
+                    }
+
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+
+                    throw new Error("Nao foi possivel carregar o resultado do quiz.");
+                })
+                .then(function (dados) {
+                    if (dados) {
+                        preencherResumo(dados);
+                        montarGraficoQuiz(dados);
+                    }
+                })
+                .catch(function () {
+                    mostrarSemResultado();
+                });
+        }
+
+        function preencherResumo(dados) {
+            document.querySelector(".album-final").textContent = dados.album_final;
+            document.querySelector(".data-resultado").textContent = new Date(dados.dt_resultado).toLocaleDateString("pt-BR");
+
+            document.querySelector(".bloco-resultado").innerHTML = `
+                <div class="album-resultado">
+                    <img src="${albuns[dados.album_final].capa}" alt="Capa do album ${dados.album_final}">
+                    <div>
+                        <strong>${dados.album_final}</strong>
+                        <span>Esse foi o album vencedor no seu ultimo quiz salvo.</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function mostrarSemResultado() {
+            document.querySelector(".album-final").textContent = "Sem resultado";
+            document.querySelector(".data-resultado").textContent = "-";
+            document.querySelector(".bloco-resultado").innerHTML = `
+                <div class="sem-resultado">
+                    Voce ainda nao salvou nenhum resultado do quiz. Faca o quiz primeiro e depois volte aqui.
+                </div>
+            `;
+        }
+
+        function montarGraficoQuiz(dados) {
+            let contexto = document.querySelector(".grafico-quiz");
+
+            if (graficoQuiz) {
+                graficoQuiz.destroy();
+            }
+
+            graficoQuiz = new Chart(contexto, {
+                type: "bar",
+                data: {
+                    labels: ["Yours Truly", "My Everything", "Dangerous Woman", "Sweetener", "Thank U, Next", "Positions", "Eternal Sunshine"],
+                    datasets: [{
+                        label: "Pontos no quiz",
+                        data: [
+                            dados.yt_pontos,
+                            dados.me_pontos,
+                            dados.dw_pontos,
+                            dados.sw_pontos,
+                            dados.tun_pontos,
+                            dados.pos_pontos,
+                            dados.es_pontos
+                        ],
+                        backgroundColor: [
+                            "#f2a6c7",
+                            "#c3b3ff",
+                            "#43495c",
+                            "#f0b189",
+                            "#c7a3f5",
+                            "#f2cf7e",
+                            "#ef9f63"
+                        ],
+                        borderRadius: 12
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function montarGraficoPopularidade() {
+            let contexto = document.querySelector(".grafico-popularidade");
+
+            if (graficoPopularidade) {
+                graficoPopularidade.destroy();
+            }
+
+            graficoPopularidade = new Chart(contexto, {
+                type: "line",
+                data: {
+                    labels: ["Spotify ouvintes mensais", "Seguidores no Spotify", "Inscritos no YouTube", "Seguidores no Instagram"],
+                    datasets: [{
+                        label: "Popularidade da Ariana",
+                        data: [84, 98, 56, 376],
+                        borderColor: "#cf8a18",
+                        backgroundColor: "rgba(207, 138, 24, 0.18)",
+                        fill: true,
+                        tension: 0.35
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
-
-<script>
-
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
-    }
-
-</script>
 
 </html>

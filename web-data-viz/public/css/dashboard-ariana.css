@@ -1,0 +1,129 @@
+.dashboard-page {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 42px 0 96px;
+}
+
+.dashboard-hero {
+    margin-bottom: 26px;
+}
+
+.dashboard-hero h2 {
+    margin: 0 0 10px;
+    color: var(--brown-strong);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.dashboard-hero p {
+    margin: 0;
+    max-width: 760px;
+    color: var(--text-soft);
+    line-height: 1.6;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1.5px solid rgba(239, 201, 106, 0.82);
+    border-radius: 26px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+}
+
+.dashboard-card h3 {
+    margin: 0 0 8px;
+    color: var(--brown);
+    font-size: 1.35rem;
+}
+
+.dashboard-card p {
+    margin: 0 0 18px;
+    color: var(--text-soft);
+}
+
+.resumo-usuario {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.resumo-item {
+    background: linear-gradient(180deg, rgba(255, 248, 228, 0.98) 0%, rgba(255, 239, 206, 0.94) 100%);
+    border: 1px solid rgba(239, 201, 106, 0.52);
+    border-radius: 18px;
+    padding: 16px;
+}
+
+.resumo-item strong {
+    display: block;
+    color: var(--brown-strong);
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.resumo-item span {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+}
+
+.grafico-box {
+    background: rgba(255, 253, 246, 0.9);
+    border-radius: 22px;
+    padding: 16px;
+    border: 1px solid rgba(239, 201, 106, 0.42);
+}
+
+.dashboard-lado {
+    display: grid;
+    gap: 20px;
+}
+
+.album-resultado {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255, 248, 228, 0.98) 0%, rgba(255, 234, 188, 0.94) 100%);
+    border: 1px solid rgba(239, 201, 106, 0.62);
+}
+
+.album-resultado img {
+    width: 86px;
+    height: 86px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+}
+
+.album-resultado strong {
+    display: block;
+    color: var(--brown-strong);
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+}
+
+.album-resultado span {
+    color: var(--text-soft);
+}
+
+.sem-resultado {
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255, 247, 231, 0.92);
+    border: 1px dashed rgba(239, 201, 106, 0.82);
+    color: var(--text-soft);
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid,
+    .resumo-usuario {
+        grid-template-columns: 1fr;
+    }
+}

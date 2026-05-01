@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="validarAcessoRestrito()">
     <!-- Cabecalho compartilhado do site -->
     <header class="header">
         <div class="header-container">
@@ -417,6 +417,33 @@
         }
 
         /*
+            Salva o ultimo resultado do quiz no banco para a dashboard usar depois.
+        */
+        function salvarResultadoNoBanco(albumFinal, pontos) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            fetch("/resultados-quiz/salvar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: idUsuario,
+                    albumFinalServer: albuns[albumFinal].nome,
+                    ytServer: pontos.YT,
+                    meServer: pontos.ME,
+                    dwServer: pontos.DW,
+                    swServer: pontos.SW,
+                    tunServer: pontos.TUN,
+                    posServer: pontos.POS,
+                    esServer: pontos.ES
+                })
+            }).catch(function (erro) {
+                console.log("Erro ao salvar resultado do quiz:", erro);
+            });
+        }
+
+        /*
             Funcao chamada no botao principal para validar e finalizar o quiz.
         */
         function finalizarQuiz() {
@@ -429,6 +456,7 @@
 
             let albumFinal = descobrirAlbumFinal(pontos);
             mostrarResultado(albumFinal, pontos);
+            salvarResultadoNoBanco(albumFinal, pontos);
         }
 
         /*

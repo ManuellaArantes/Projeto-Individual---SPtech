@@ -94,8 +94,6 @@
     let emailVar = email_input.value.trim();
     let senhaVar = senha_input.value;
     let confirmacaoSenhaVar = confirmacao_senha_input.value;
-    let idEmpresaVincular = 1;
-
     if (
       nomeVar == "" ||
       emailVar == "" ||
@@ -139,8 +137,7 @@
       body: JSON.stringify({
         nomeServer: nomeVar,
         emailServer: emailVar,
-        senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
+        senhaServer: senhaVar
       })
     })
       .then(function (resposta) {
