@@ -1,19 +1,34 @@
 /* albuns.css */
 
 .pagina-discografia {
-    background-color: #ffffff;
+    position: relative;
     color: #333;
-    padding-bottom: 100px;
+    padding-bottom: 72px;
+}
+
+.faixa-cor-discografia {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100% - 32px));
+    height: 300px;
+    border-radius: 0 0 28px 28px;
+    background-color: #fff0f5;
+    transition: background-color 0.45s ease;
+    z-index: 0;
 }
 
 .cabecalho-discografia {
+    position: relative;
+    z-index: 1;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 80px 5% 40px;
+    padding: 46px 5% 24px;
 }
 
 .cabecalho-discografia h2 {
-    font-size: 5rem;
+    font-size: 3.8rem;
     font-weight: 800;
     color: #000;
     margin: 0 0 10px;
@@ -22,31 +37,34 @@
 }
 
 .cabecalho-discografia p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #888;
     margin: 0;
 }
 
 .lista-de-albuns {
+    position: relative;
+    z-index: 1;
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 5%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 24px;
 }
 
 .caixa-album {
     display: flex;
-    gap: 50px;
-    padding: 50px;
+    gap: 30px;
+    padding: 30px;
     border-radius: 20px;
     align-items: flex-start;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    transition: background-color 0.35s ease, transform 0.25s ease;
 }
 
 .capa-album {
-    flex: 0 0 350px;
+    flex: 0 0 250px;
 }
 
 .capa-album img {
@@ -64,7 +82,7 @@
 }
 
 .ano-lancamento {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: #666;
     letter-spacing: 2px;
     margin-bottom: 10px;
@@ -72,26 +90,26 @@
 }
 
 .titulo-album {
-    font-size: 3.5rem;
+    font-size: 2.6rem;
     line-height: 1.1;
-    margin: 0 0 20px;
+    margin: 0 0 14px;
 }
 
 /* Fontes personalizadas para cada album */
-.fonte-yours-truly { font-family: 'Great Vibes', cursive; text-transform: capitalize; font-size: 4.5rem; color: #ff8ca3; }
-.fonte-my-everything { font-family: 'Playfair Display', serif; font-size: 4rem; color: #333; }
+.fonte-yours-truly { font-family: 'Great Vibes', cursive; text-transform: capitalize; font-size: 3.4rem; color: #ff8ca3; }
+.fonte-my-everything { font-family: 'Playfair Display', serif; font-size: 3rem; color: #333; }
 .fonte-dangerous-woman { font-family: 'Playfair Display', serif; font-style: italic; color: #111; }
 .fonte-sweetener { font-family: 'Outfit', sans-serif; text-transform: lowercase; color: #cba885; }
-.fonte-thank-u-next { font-family: 'Caveat', cursive; text-transform: lowercase; font-size: 4.5rem; color: #ff69b4; }
+.fonte-thank-u-next { font-family: 'Caveat', cursive; text-transform: lowercase; font-size: 3.4rem; color: #ff69b4; }
 .fonte-positions { font-family: 'Outfit', sans-serif; text-transform: lowercase; font-weight: 800; color: #6e8b6e; }
 .fonte-eternal-sunshine { font-family: 'Cormorant Garamond', serif; text-transform: lowercase; color: #b22222; }
-.fonte-petal { font-family: 'Sacramento', cursive; text-transform: capitalize; font-size: 5rem; color: #ff8ca3; }
+.fonte-petal { font-family: 'Sacramento', cursive; text-transform: capitalize; font-size: 3.8rem; color: #ff8ca3; }
 
 .descricao-album {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #444;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .area-avaliacao-spotify {
@@ -132,7 +150,7 @@
 }
 
 .topo-previa-spotify {
-    margin-top: 30px;
+    margin-top: 18px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
@@ -164,14 +182,14 @@
 @media (max-width: 800px) {
     .caixa-album {
         flex-direction: column;
-        gap: 30px;
-        padding: 30px;
+        gap: 22px;
+        padding: 22px;
     }
     .capa-album {
         flex: 0 0 auto;
         width: 100%;
     }
     .cabecalho-discografia h2 {
-        font-size: 3.5rem;
+        font-size: 2.8rem;
     }
 }

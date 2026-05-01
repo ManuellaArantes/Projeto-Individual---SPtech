@@ -273,6 +273,10 @@ a {
   font-weight: 500;
 }
 
+.footer .version {
+  display: none;
+}
+
 .titulo {
   margin: 0;
   font-size: 1.2rem;

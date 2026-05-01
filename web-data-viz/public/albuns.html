@@ -31,6 +31,8 @@
     </header>
 
     <main class="pagina-discografia">
+        <div class="faixa-cor-discografia"></div>
+
         <section class="cabecalho-discografia">
             <h2>DISCOGRAFIA</h2>
             <p>Uma jornada musical pelos álbuns de estúdio da Ariana Grande.</p>
@@ -128,7 +130,7 @@
             {
                 id: "eternal-sunshine",
                 nome: "eternal sunshine",
-                capa: "./img/eternal sunshine - home page.jpg",
+                capa: "./img/capa album eternal sunshine.jpg",
                 ano: 2024,
                 musicaPopular: "we can't be friends (wait for your love)",
                 spotifyEmbed: "https://open.spotify.com/embed/track/51ZQ1vr10ffzbwIjDCwqm4?utm_source=generator",
@@ -168,7 +170,7 @@
 
         function renderizarAlbuns() {
             let avaliacoes = obterAvaliacoesSalvas();
-            let lista_de_albuns = document.getElementById("lista_de_albuns");
+            let lista_de_albuns = document.querySelector("#lista_de_albuns");
             lista_de_albuns.innerHTML = "";
 
             for (let i = 0; i < albuns.length; i++) {
@@ -231,7 +233,7 @@
             let observer = new IntersectionObserver(function (entradas) {
                 for (let i = 0; i < entradas.length; i++) {
                     if (entradas[i].isIntersecting) {
-                        document.body.style.backgroundColor = entradas[i].target.dataset.corFundo;
+                        document.querySelector(".faixa-cor-discografia").style.backgroundColor = entradas[i].target.dataset.corFundo;
                     }
                 }
             }, {
