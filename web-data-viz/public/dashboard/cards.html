@@ -16,74 +16,128 @@
 
 <body onload="carregarDashboard()">
     <header class="header">
-        <div class="container header-content">
-            <a class="brand brand-home" href="../index.html">
-                <img class="brand-logo" src="../img/Ariana logo.jpg" alt="Logo do site InfoAriana">
-                <h1 class="brand-title">InfoAriana</h1>
-            </a>
+        <div class="header-container">
+            <a class="logo" href="../index.html">ARIANA GRANDE</a>
+            <nav class="nav-links">
+                <a href="../index.html">INÍCIO</a>
+                <a href="../albuns.html">ÁLBUNS</a>
+                <a href="../premios.html">PRÊMIOS</a>
+                <a href="../quiz.html">QUIZ</a>
+                <a class="active link-dashboard" href="./cards.html">DASHBOARD</a>
+                <a class="subscribe-btn link-auth" href="../cadastro.html">SUBSCRIBE</a>
+            </nav>
         </div>
-
-        <nav class="menu-dropdown">
-            <a href="../index.html">Inicio</a>
-            <a href="../albuns.html">Albuns</a>
-            <a href="../premios.html">Premios</a>
-            <a href="../quiz.html">Quiz</a>
-            <a class="ativo" href="./cards.html">Dashboard</a>
-            <a class="menu-cta" href="../cadastro.html">Cadastrar</a>
-        </nav>
     </header>
 
     <main class="dashboard-page">
         <section class="dashboard-hero">
-            <h2>Dashboard da Ariana</h2>
-            <p>
-                Aqui aparecem o ultimo resultado salvo do seu quiz e um grafico simples sobre a popularidade da Ariana Grande.
-            </p>
+            <div>
+                <p class="dashboard-kicker">Última atualização</p>
+                <span class="dashboard-data">Maio 2026</span>
+            </div>
+
+            <div class="dashboard-titulos">
+                <h2>ANALYTICS</h2>
+                <h3>DASHBOARD</h3>
+                <p>Gráficos do quiz, números de popularidade e uma visão geral da carreira da Ariana Grande.</p>
+            </div>
         </section>
 
-        <div class="dashboard-grid">
-            <section class="dashboard-card">
-                <h3>Seu desempenho no quiz</h3>
-                <p>Esse grafico mostra quantos pontos voce fez em cada album no seu ultimo resultado salvo.</p>
+        <section class="metricas-grid">
+            <article class="metrica-card">
+                <span>TOTAL DE STREAMS</span>
+                <strong>85B+</strong>
+                <p>+12% no último ciclo</p>
+            </article>
 
-                <div class="resumo-usuario">
-                    <div class="resumo-item">
-                        <strong class="nome-usuario">-</strong>
-                        <span>Usuario logado</span>
-                    </div>
+            <article class="metrica-card">
+                <span>OUVINTES MENSAIS</span>
+                <strong>380M+</strong>
+                <p>+8% em plataformas</p>
+            </article>
 
-                    <div class="resumo-item">
-                        <strong class="album-final">-</strong>
-                        <span>Album vencedor</span>
-                    </div>
+            <article class="metrica-card">
+                <span>PRÊMIOS TOTAIS</span>
+                <strong>470+</strong>
+                <p>Reconhecimento mundial</p>
+            </article>
 
-                    <div class="resumo-item">
-                        <strong class="data-resultado">-</strong>
-                        <span>Ultimo resultado</span>
-                    </div>
+            <article class="metrica-card">
+                <span>ÁLBUNS DE ESTÚDIO</span>
+                <strong>7</strong>
+                <p>Último: 2024</p>
+            </article>
+        </section>
+
+        <section class="dashboard-bloco branco">
+            <div class="bloco-topo">
+                <div>
+                    <h3>Seu resultado no quiz</h3>
+                    <p>Esse gráfico muda de acordo com o último quiz salvo por você.</p>
                 </div>
 
-                <div class="grafico-box">
-                    <canvas class="grafico-quiz"></canvas>
+                <div class="bloco-usuario">
+                    <span class="nome-usuario-header">-</span>
+                    <small>Usuário logado</small>
                 </div>
-            </section>
-
-            <div class="dashboard-lado">
-                <section class="dashboard-card">
-                    <h3>Album que mais combina com voce</h3>
-                    <div class="bloco-resultado"></div>
-                </section>
-
-                <section class="dashboard-card">
-                    <h3>Popularidade da Ariana Grande</h3>
-                    <p>Grafico simples com numeros gerais de carreira para enriquecer a dashboard.</p>
-
-                    <div class="grafico-box">
-                        <canvas class="grafico-popularidade"></canvas>
-                    </div>
-                </section>
             </div>
-        </div>
+
+            <div class="resultado-hero"></div>
+
+            <div class="grafico-area">
+                <canvas class="grafico-quiz"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-bloco branco">
+            <h3>Vendas estimadas por álbum</h3>
+            <p>Uma visão comparativa inspirada no desempenho das eras de estúdio.</p>
+
+            <div class="grafico-area">
+                <canvas class="grafico-vendas"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-duplo">
+            <article class="dashboard-bloco branco">
+                <h3>Mix de gêneros</h3>
+                <p>Distribuição aproximada dos estilos que mais aparecem na discografia.</p>
+
+                <div class="grafico-area pequeno">
+                    <canvas class="grafico-generos"></canvas>
+                </div>
+            </article>
+
+            <article class="dashboard-bloco preto">
+                <h3>Distribuição de plataformas</h3>
+                <p>Participação aproximada das plataformas no consumo digital.</p>
+
+                <div class="grafico-area pequeno">
+                    <canvas class="grafico-plataformas"></canvas>
+                </div>
+            </article>
+        </section>
+
+        <section class="dashboard-bloco branco insights">
+            <h3>Principais insights</h3>
+
+            <div class="insights-grid">
+                <article>
+                    <strong>Melhor fase comercial</strong>
+                    <p>"thank u, next" segue como uma das eras mais fortes em impacto e identificação cultural.</p>
+                </article>
+
+                <article>
+                    <strong>Versatilidade sonora</strong>
+                    <p>A carreira da Ariana passeia por pop, R&B, dance e baladas com muita consistência.</p>
+                </article>
+
+                <article>
+                    <strong>Seu perfil no quiz</strong>
+                    <p>O gráfico de pontos mostra quais eras mais combinam com seu momento emocional atual.</p>
+                </article>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -95,23 +149,26 @@
 
     <script>
         let albuns = {
-            "Yours Truly": { capa: "../img/Yours Truly.jpg" },
-            "My Everything": { capa: "../img/My Everything.jpg" },
-            "Dangerous Woman": { capa: "../img/Dangerous Woman.jpg" },
-            "Sweetener": { capa: "../img/Sweetener.jpg" },
-            "Thank U, Next": { capa: "../img/thank_you_next.jpg" },
-            "Positions": { capa: "../img/positions.jpg" },
-            "Eternal Sunshine": { capa: "../img/eternal-sunshine-album.jpg" }
+            "Yours Truly": { capa: "../img/Yours Truly.jpg", cor: "#f3a3c4" },
+            "My Everything": { capa: "../img/My Everything.jpg", cor: "#c3b2ff" },
+            "Dangerous Woman": { capa: "../img/Dangerous Woman.jpg", cor: "#4d5366" },
+            "Sweetener": { capa: "../img/Sweetener.jpg", cor: "#f4b387" },
+            "Thank U, Next": { capa: "../img/thank_you_next.jpg", cor: "#d39be8" },
+            "Positions": { capa: "../img/positions.jpg", cor: "#d8c273" },
+            "Eternal Sunshine": { capa: "../img/eternal-sunshine-album.jpg", cor: "#ee9a63" }
         };
 
         let graficoQuiz = null;
-        let graficoPopularidade = null;
+        let graficoVendas = null;
+        let graficoGeneros = null;
+        let graficoPlataformas = null;
 
         function carregarDashboard() {
             validarSessao();
-            document.querySelector(".nome-usuario").textContent = sessionStorage.NOME_USUARIO;
             carregarUltimoResultado();
-            montarGraficoPopularidade();
+            montarGraficoVendas();
+            montarGraficoGeneros();
+            montarGraficoPlataformas();
         }
 
         function carregarUltimoResultado() {
@@ -128,11 +185,11 @@
                         return resposta.json();
                     }
 
-                    throw new Error("Nao foi possivel carregar o resultado do quiz.");
+                    throw new Error("Erro ao carregar resultado.");
                 })
                 .then(function (dados) {
                     if (dados) {
-                        preencherResumo(dados);
+                        preencherResultado(dados);
                         montarGraficoQuiz(dados);
                     }
                 })
@@ -141,63 +198,53 @@
                 });
         }
 
-        function preencherResumo(dados) {
-            document.querySelector(".album-final").textContent = dados.album_final;
-            document.querySelector(".data-resultado").textContent = new Date(dados.dt_resultado).toLocaleDateString("pt-BR");
+        function preencherResultado(dados) {
+            let areaResultado = document.querySelector(".resultado-hero");
+            let nomeUsuario = document.querySelector(".nome-usuario-header");
 
-            document.querySelector(".bloco-resultado").innerHTML = `
-                <div class="album-resultado">
-                    <img src="${albuns[dados.album_final].capa}" alt="Capa do album ${dados.album_final}">
+            nomeUsuario.textContent = sessionStorage.NOME_USUARIO;
+
+            areaResultado.innerHTML = `
+                <div class="resultado-card" style="--cor-album:${albuns[dados.album_final].cor}">
+                    <img src="${albuns[dados.album_final].capa}" alt="Capa do álbum ${dados.album_final}">
                     <div>
+                        <span class="resultado-label">Álbum vencedor</span>
                         <strong>${dados.album_final}</strong>
-                        <span>Esse foi o album vencedor no seu ultimo quiz salvo.</span>
+                        <p>Esse foi o resultado salvo no seu último quiz.</p>
                     </div>
                 </div>
             `;
         }
 
         function mostrarSemResultado() {
-            document.querySelector(".album-final").textContent = "Sem resultado";
-            document.querySelector(".data-resultado").textContent = "-";
-            document.querySelector(".bloco-resultado").innerHTML = `
-                <div class="sem-resultado">
-                    Voce ainda nao salvou nenhum resultado do quiz. Faca o quiz primeiro e depois volte aqui.
+            let areaResultado = document.querySelector(".resultado-hero");
+            let nomeUsuario = document.querySelector(".nome-usuario-header");
+
+            nomeUsuario.textContent = sessionStorage.NOME_USUARIO;
+
+            areaResultado.innerHTML = `
+                <div class="aviso-vazio">
+                    Você ainda não respondeu o quiz com o login ativo. Faça o quiz e volte aqui para ver seu gráfico personalizado.
                 </div>
             `;
         }
 
         function montarGraficoQuiz(dados) {
-            let contexto = document.querySelector(".grafico-quiz");
+            let canvas = document.querySelector(".grafico-quiz");
 
             if (graficoQuiz) {
                 graficoQuiz.destroy();
             }
 
-            graficoQuiz = new Chart(contexto, {
+            graficoQuiz = new Chart(canvas, {
                 type: "bar",
                 data: {
                     labels: ["Yours Truly", "My Everything", "Dangerous Woman", "Sweetener", "Thank U, Next", "Positions", "Eternal Sunshine"],
                     datasets: [{
                         label: "Pontos no quiz",
-                        data: [
-                            dados.yt_pontos,
-                            dados.me_pontos,
-                            dados.dw_pontos,
-                            dados.sw_pontos,
-                            dados.tun_pontos,
-                            dados.pos_pontos,
-                            dados.es_pontos
-                        ],
-                        backgroundColor: [
-                            "#f2a6c7",
-                            "#c3b3ff",
-                            "#43495c",
-                            "#f0b189",
-                            "#c7a3f5",
-                            "#f2cf7e",
-                            "#ef9f63"
-                        ],
-                        borderRadius: 12
+                        data: [dados.yt_pontos, dados.me_pontos, dados.dw_pontos, dados.sw_pontos, dados.tun_pontos, dados.pos_pontos, dados.es_pontos],
+                        backgroundColor: ["#f3a3c4", "#c3b2ff", "#555c73", "#f4b387", "#d39be8", "#d8c273", "#ee9a63"],
+                        borderRadius: 14
                     }]
                 },
                 options: {
@@ -209,31 +256,37 @@
                     },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                color: "#6c6c6c"
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: "#4a4a4a"
+                            }
                         }
                     }
                 }
             });
         }
 
-        function montarGraficoPopularidade() {
-            let contexto = document.querySelector(".grafico-popularidade");
+        function montarGraficoVendas() {
+            let canvas = document.querySelector(".grafico-vendas");
 
-            if (graficoPopularidade) {
-                graficoPopularidade.destroy();
+            if (graficoVendas) {
+                graficoVendas.destroy();
             }
 
-            graficoPopularidade = new Chart(contexto, {
-                type: "line",
+            graficoVendas = new Chart(canvas, {
+                type: "bar",
                 data: {
-                    labels: ["Spotify ouvintes mensais", "Seguidores no Spotify", "Inscritos no YouTube", "Seguidores no Instagram"],
+                    labels: ["Yours Truly", "My Everything", "Dangerous Woman", "Sweetener", "thank u, next", "Positions", "eternal sunshine"],
                     datasets: [{
-                        label: "Popularidade da Ariana",
-                        data: [84, 98, 56, 376],
-                        borderColor: "#cf8a18",
-                        backgroundColor: "rgba(207, 138, 24, 0.18)",
-                        fill: true,
-                        tension: 0.35
+                        label: "Vendas estimadas (milhares)",
+                        data: [500, 1000, 1500, 800, 2000, 1200, 900],
+                        backgroundColor: "#111111",
+                        borderRadius: 8
                     }]
                 },
                 options: {
@@ -241,6 +294,67 @@
                     plugins: {
                         legend: {
                             display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function montarGraficoGeneros() {
+            let canvas = document.querySelector(".grafico-generos");
+
+            if (graficoGeneros) {
+                graficoGeneros.destroy();
+            }
+
+            graficoGeneros = new Chart(canvas, {
+                type: "doughnut",
+                data: {
+                    labels: ["Pop", "R&B", "Dance", "Ballad"],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: ["#111111", "#565656", "#808080", "#b3b3b3"],
+                        borderColor: "#ffffff",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "bottom"
+                        }
+                    }
+                }
+            });
+        }
+
+        function montarGraficoPlataformas() {
+            let canvas = document.querySelector(".grafico-plataformas");
+
+            if (graficoPlataformas) {
+                graficoPlataformas.destroy();
+            }
+
+            graficoPlataformas = new Chart(canvas, {
+                type: "doughnut",
+                data: {
+                    labels: ["Spotify", "Apple Music", "YouTube", "Amazon Music", "Outros"],
+                    datasets: [{
+                        data: [40, 25, 20, 10, 5],
+                        backgroundColor: ["#f5f5f5", "#b0b0b0", "#8d8d8d", "#666666", "#3d3d3d"],
+                        borderColor: "#181818",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "bottom",
+                            labels: {
+                                color: "#f5f5f5"
+                            }
                         }
                     }
                 }

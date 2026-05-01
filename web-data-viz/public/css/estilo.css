@@ -80,6 +80,10 @@ a {
   transition: color 0.3s ease;
 }
 
+.link-dashboard {
+  display: none;
+}
+
 .nav-links a:hover, .nav-links a.active {
   color: #fff;
 }
@@ -95,6 +99,10 @@ a {
 .subscribe-btn:hover {
   background-color: #fff;
   color: #000 !important;
+}
+
+.nav-links .link-auth {
+  color: #fff;
 }
 
 .hero {
