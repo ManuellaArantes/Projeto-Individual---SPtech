@@ -2,6 +2,7 @@
     width: min(1250px, calc(100% - 32px));
     margin: 0 auto;
     padding: 28px 0 82px;
+    overflow-x: clip;
 }
 
 .dashboard-hero {
@@ -214,11 +215,29 @@
     background: rgba(255, 255, 255, 0.68);
     border: 1px solid rgba(0, 0, 0, 0.06);
     padding: 18px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .dashboard-bloco.preto .grafico-area {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(255, 255, 255, 0.08);
+}
+
+.grafico-area canvas {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+}
+
+.grafico-quiz,
+.grafico-vendas {
+    height: 330px !important;
+}
+
+.grafico-generos,
+.grafico-plataformas {
+    height: 280px !important;
 }
 
 .grafico-area.pequeno {
@@ -264,6 +283,11 @@
     .dashboard-hero {
         grid-template-columns: 1fr;
     }
+
+    .grafico-quiz,
+    .grafico-vendas {
+        height: 290px !important;
+    }
 }
 
 @media (max-width: 640px) {
@@ -281,5 +305,28 @@
 
     .bloco-usuario {
         text-align: left;
+    }
+
+    .dashboard-page {
+        width: min(100%, calc(100% - 20px));
+        padding-bottom: 56px;
+    }
+
+    .dashboard-bloco {
+        padding: 18px 14px;
+    }
+
+    .grafico-area {
+        padding: 12px;
+    }
+
+    .grafico-quiz,
+    .grafico-vendas {
+        height: 250px !important;
+    }
+
+    .grafico-generos,
+    .grafico-plataformas {
+        height: 230px !important;
     }
 }

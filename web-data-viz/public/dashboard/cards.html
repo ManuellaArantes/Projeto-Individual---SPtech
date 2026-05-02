@@ -37,12 +37,13 @@
             </div>
 
             <div class="dashboard-titulos">
-                <h2>ANALYTICS</h2>
+                <h2>ARIANA GRANDE</h2>
                 <h3>DASHBOARD</h3>
                 <p>Gráficos do quiz, números de popularidade e uma visão geral da carreira da Ariana Grande.</p>
             </div>
         </section>
 
+        <!-- Cards do inicio -->
         <section class="metricas-grid">
             <article class="metrica-card">
                 <span>TOTAL DE STREAMS</span>
@@ -76,11 +77,14 @@
                     <p>Esse gráfico muda de acordo com o último quiz salvo por você.</p>
                 </div>
 
+                 <!-- Nome do usuário logado aparece aqui -->
                 <div class="bloco-usuario">
                     <span class="nome-usuario-header">-</span>
                     <small>Usuário logado</small>
                 </div>
             </div>
+
+            <!-- Card do resultado do quiz aparece aqui -->
 
             <div class="resultado-hero"></div>
 
@@ -89,6 +93,7 @@
             </div>
         </section>
 
+       
         <section class="dashboard-bloco branco">
             <h3>Vendas estimadas por álbum</h3>
             <p>Uma visão comparativa inspirada no desempenho das eras de estúdio.</p>
@@ -248,6 +253,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             display: false
@@ -262,7 +268,10 @@
                         },
                         x: {
                             ticks: {
-                                color: "#4a4a4a"
+                                color: "#4a4a4a",
+                                maxRotation: 30,
+                                minRotation: 0,
+                                autoSkip: true
                             }
                         }
                     }
@@ -290,9 +299,19 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 30,
+                                minRotation: 0,
+                                autoSkip: true
+                            }
                         }
                     }
                 }
@@ -319,6 +338,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             position: "bottom"
@@ -348,6 +368,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             position: "bottom",
