@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo.jpg?v=5" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -152,6 +152,7 @@
     </footer>
 
     <script>
+        /* BLOCO: mapa visual dos álbuns para exibir capa e cor no resultado do quiz. */
         let albuns = {
             "Yours Truly": { capa: "../img/Yours Truly.jpg", cor: "#f3a3c4" },
             "My Everything": { capa: "../img/My Everything.jpg", cor: "#c3b2ff" },
@@ -167,6 +168,7 @@
         let graficoGeneros = null;
         let graficoPlataformas = null;
 
+        /* BLOCO: inicializa a dashboard com sessão, resultado do quiz e gráficos gerais. */
         function carregarDashboard() {
             validarSessao();
             carregarUltimoResultado();
@@ -175,6 +177,7 @@
             montarGraficoPlataformas();
         }
 
+        /* BLOCO: busca o último quiz do usuário logado e atualiza os componentes da tela. */
         function carregarUltimoResultado() {
             let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -384,3 +387,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+

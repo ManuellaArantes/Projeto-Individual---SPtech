@@ -10,7 +10,7 @@
     <script src="./js/sessao.js"></script>
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/auth.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="icon" href="./img/logo.jpg?v=5">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
@@ -80,6 +80,7 @@
 </html>
 
 <script>
+    /* BLOCO: valida credenciais, autentica usuário e salva sessão local. */
     function entrar() {
         aguardar();
 
@@ -128,7 +129,15 @@
         return false;
     }
 
+    /* BLOCO: remove mensagens temporárias da tela de login. */
     function sumirMensagem() {
         cardErro.style.display = "none";
     }
 </script>
+
+
+
+
+
+
+

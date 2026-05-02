@@ -1,11 +1,12 @@
-/* home.css */
+/* BLOCO: capa principal da homepage */
 
-.hero-section {
+.secao-capa {
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 680px;
-    background-image: url('../img/Ariana\\ -\\ Homepage.jpg'); /* The halftone image */
+    min-height: 560px;
+    /* BLOCO: imagem de fundo da abertura da homepage. */
+    background-image: url('../img/Ariana\\ -\\ Homepage.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -16,7 +17,7 @@
     border-bottom: 1px solid #333;
 }
 
-.hero-overlay {
+.capa-filtro {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.4);
@@ -25,7 +26,7 @@
     position: relative;
 }
 
-.hero-top-text {
+.capa-topo {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -37,9 +38,9 @@
     text-transform: uppercase;
 }
 
-.massive-text {
-    font-size: 15vw;
-    line-height: 0.85;
+.capa-titulo {
+    font-size: clamp(3rem, 9vw, 7.2rem);
+    line-height: 0.9;
     font-weight: 800;
     color: #fff;
     text-align: left;
@@ -47,38 +48,42 @@
     text-transform: uppercase;
     letter-spacing: -2px;
     text-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+    max-width: 1020px;
+    width: 100%;
 }
 
 
 
-/* Section 2: Dark Cards */
-.dark-cards-section {
+/* BLOCO: introdução sobre a artista */
+.secao-intro {
     background-color: #1a1a1a;
-    padding: 80px 5%;
+    padding: 64px 5%;
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
-.dark-card {
-    flex: 1;
+.card-intro {
+    flex: 1 1 420px;
     min-width: min(100%, 300px);
+    max-width: 500px;
     background-color: #242424;
-    padding: 50px;
+    padding: 36px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.dark-card h3 {
+.card-intro h3 {
     font-size: 1.2rem;
     letter-spacing: 2px;
     color: #fff;
     margin-bottom: 20px;
 }
 
-.dark-card p {
+.card-intro p {
     font-size: 1.1rem;
     color: #aaa;
     line-height: 1.6;
@@ -109,55 +114,57 @@
     color: #000;
 }
 
-/* Section 3 & 5: White background sections */
-.about-section, .discover-section {
+/* BLOCO: seções com fundo claro */
+.secao-sobre, .secao-favoritos {
     background-color: #ffffff;
-    padding: 100px 5%;
+    padding: 72px 5%;
 }
 
-.about-container, .discover-section {
-    max-width: 1200px;
+.container-sobre, .secao-favoritos {
+    max-width: 1040px;
     margin: 0 auto;
 }
 
-.section-title.black {
+.titulo-secao.titulo-escuro {
     color: #000;
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     font-weight: 800;
     margin-bottom: 30px;
     text-transform: uppercase;
     line-height: 1;
 }
 
-.section-desc.black {
+.texto-secao.texto-escuro {
     color: #555;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     line-height: 1.6;
     max-width: 800px;
     margin-bottom: 60px;
 }
 
-.image-cards {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
+/* BLOCO: grade de cards de imagem sem corte lateral */
+.grade-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    width: 100%;
 }
 
-.img-card {
-    flex: 1;
-    min-width: min(100%, 300px);
+.card-imagem {
+    min-width: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.img-card img {
+.card-imagem img {
     width: 100%;
     aspect-ratio: 4/5;
     object-fit: cover;
     margin-bottom: 20px;
 }
 
-.img-card h4 {
+.card-imagem h4 {
     font-size: 1.1rem;
     color: #000;
     letter-spacing: 1px;
@@ -165,103 +172,106 @@
     font-weight: 800;
 }
 
-.img-card p {
+.card-imagem p {
     font-size: 0.95rem;
     color: #666;
+    line-height: 1.55;
+    word-break: break-word;
 }
 
-/* Section 4: A Style That Inspires */
-.style-inspires-section {
+/* BLOCO: visuais e eras */
+.secao-visuais {
     background-color: #0a0a0a;
-    padding: 100px 5%;
+    padding: 72px 5%;
 }
 
-.style-container {
-    max-width: 1200px;
+.container-visuais {
+    max-width: 1040px;
     margin: 0 auto;
     display: flex;
     gap: 60px;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
 
-.style-image {
+.visual-imagem {
     flex: 1;
     min-width: min(100%, 300px);
 }
 
-.style-image img {
+.visual-imagem img {
     width: 100%;
-    max-height: 700px;
+    max-height: 560px;
     object-fit: cover;
 }
 
-.style-text {
+.visual-texto {
     flex: 1;
     min-width: min(100%, 300px);
     color: #fff;
 }
 
 @media (max-width: 900px) {
-    .massive-text {
+    .capa-titulo {
         font-size: clamp(3rem, 16vw, 7rem);
         margin: auto 6%;
     }
 
-    .section-title.black,
-    .section-title.white {
+    .titulo-secao.titulo-escuro,
+    .titulo-secao.titulo-claro {
         font-size: clamp(2rem, 8vw, 3rem);
     }
 }
 
 @media (max-width: 560px) {
-    .hero-section {
+    .secao-capa {
         min-height: 500px;
     }
 
-    .hero-top-text {
+    .capa-topo {
         padding: 20px 6%;
         font-size: 0.72rem;
     }
 
-    .dark-cards-section,
-    .about-section,
-    .style-inspires-section,
-    .discover-section {
+    .secao-intro,
+    .secao-sobre,
+    .secao-visuais,
+    .secao-favoritos {
         padding: 60px 6%;
     }
 
-    .dark-card {
+    .card-intro {
         padding: 30px 24px;
     }
 }
 
-.section-title.white {
+.titulo-secao.titulo-claro {
     color: #fff;
-    font-size: 4rem;
+    font-size: 2.8rem;
     font-weight: 800;
     margin-bottom: 50px;
     line-height: 1;
     text-transform: uppercase;
 }
 
-.grey-text {
+.texto-neutro {
     color: #888;
 }
 
-.feature-item {
+.item-contexto {
     margin-bottom: 30px;
 }
 
-.feature-item h5 {
+.item-contexto h5 {
     font-size: 0.85rem;
-    color: #cc9966; /* Subtle accent color */
+    color: #cc9966;
     letter-spacing: 2px;
     margin-bottom: 10px;
     text-transform: uppercase;
 }
 
-.feature-item p {
+.item-contexto p {
     font-size: 1.05rem;
     color: #aaa;
     line-height: 1.6;
@@ -281,14 +291,18 @@
     border: 2px solid #333;
 }
 
-/* Discover section specifics */
-.discover-header {
+/* BLOCO: cabeçalho da seção de favoritos */
+.topo-favoritos {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 60px;
+    margin-bottom: 34px;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+.secao-favoritos .card-imagem {
+    max-width: 100%;
 }
 
 .subscribe-btn.solid-black {
