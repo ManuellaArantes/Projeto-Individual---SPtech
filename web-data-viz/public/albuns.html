@@ -30,15 +30,15 @@
         </div>
     </header>
 
-    <main class="pagina-discografia">
-        <div class="faixa-cor-discografia"></div>
+    <main class="pagina-albuns">
+        <div class="faixa-albuns"></div>
 
-        <section class="cabecalho-discografia">
+        <section class="cabecalho-albuns">
             <h2>DISCOGRAFIA</h2>
             <p>Uma jornada musical pelos álbuns de estúdio da Ariana Grande.</p>
         </section>
 
-        <section id="lista_de_albuns" class="lista-de-albuns"></section>
+        <section class="lista-de-albuns"></section>
     </main>
 
     <footer class="footer">
@@ -170,8 +170,8 @@
 
         function renderizarAlbuns() {
             let avaliacoes = obterAvaliacoesSalvas();
-            let lista_de_albuns = document.querySelector("#lista_de_albuns");
-            lista_de_albuns.innerHTML = "";
+            let listaAlbuns = document.querySelector(".lista-de-albuns");
+            listaAlbuns.innerHTML = "";
 
             for (let i = 0; i < albuns.length; i++) {
                 let album = albuns[i];
@@ -185,9 +185,9 @@
                 let htmlSpotify = "";
                 if (album.spotifyEmbed !== "") {
                     htmlSpotify = `
-                        <div class="topo-previa-spotify">
-                            <span class="titulo-previa" style="color: ${album.corDestaque}">Prévia no Spotify</span>
-                            <a class="link-abrir-spotify" href="${album.spotifyLink}" target="_blank" style="color: ${album.corDestaque}">
+                        <div class="topo-spotify">
+                            <span class="titulo-spotify" style="color: ${album.corDestaque}">Prévia no Spotify</span>
+                            <a class="link-spotify" href="${album.spotifyLink}" target="_blank" style="color: ${album.corDestaque}">
                                 Abrir no Spotify
                             </a>
                         </div>
@@ -206,15 +206,15 @@
                     </div>
 
                     <div class="informacoes-album">
-                        <span class="ano-lancamento">${album.ano}</span>
+                        <span class="ano-album">${album.ano}</span>
                         <h3 class="titulo-album ${album.classeFonte}">${album.nome}</h3>
                         
                         <p class="descricao-album">${album.descricao}</p>
 
-                        <div class="area-avaliacao-spotify">
-                            <div class="bloco-avaliacao">
-                                <span class="rotulo-avaliacao" style="color: ${album.corDestaque}">Avalie este álbum:</span>
-                                <div class="botoes-estrela" id="estrelas_${album.id}"></div>
+                        <div class="area-album">
+                            <div class="bloco-nota">
+                                <span class="texto-nota" style="color: ${album.corDestaque}">Avalie este álbum:</span>
+                                <div class="estrelas"></div>
                             </div>
                         </div>
                         
@@ -222,8 +222,10 @@
                     </div>
                 `;
 
-                lista_de_albuns.appendChild(card);
-                renderizarEstrelas(album.id, notaAtual, album.corDestaque);
+                listaAlbuns.appendChild(card);
+
+                let estrelas = card.querySelector(".estrelas");
+                renderizarEstrelas(estrelas, album.id, notaAtual, album.corDestaque);
             }
 
             atualizarFundoPorAlbum();
@@ -233,7 +235,7 @@
             let observer = new IntersectionObserver(function (entradas) {
                 for (let i = 0; i < entradas.length; i++) {
                     if (entradas[i].isIntersecting) {
-                        document.querySelector(".faixa-cor-discografia").style.backgroundColor = entradas[i].target.dataset.corFundo;
+                        document.querySelector(".faixa-albuns").style.backgroundColor = entradas[i].target.dataset.corFundo;
                     }
                 }
             }, {
@@ -247,8 +249,7 @@
             }
         }
 
-        function renderizarEstrelas(idAlbum, notaAtual, corDestaque) {
-            let container = window["estrelas_" + idAlbum];
+        function renderizarEstrelas(container, idAlbum, notaAtual, corDestaque) {
             container.innerHTML = "";
 
             for (let estrela = 1; estrela <= 5; estrela++) {
@@ -262,19 +263,19 @@
                     botao.className = "estrela";
                 }
                 botao.onclick = function () {
-                    definirNota(idAlbum, estrela, corDestaque);
+                    definirNota(container, idAlbum, estrela, corDestaque);
                 };
                 container.appendChild(botao);
             }
         }
 
-        function definirNota(idAlbum, notaClicada, corDestaque) {
+        function definirNota(container, idAlbum, notaClicada, corDestaque) {
             let avaliacoes = obterAvaliacoesSalvas();
             let notaAtual = avaliacoes[idAlbum] || 0;
             let novaNota = notaAtual === notaClicada ? 0 : notaClicada;
 
             salvarAvaliacao(idAlbum, novaNota);
-            renderizarEstrelas(idAlbum, novaNota, corDestaque);
+            renderizarEstrelas(container, idAlbum, novaNota, corDestaque);
         }
 
         renderizarAlbuns();

@@ -30,10 +30,10 @@
         </div>
     </header>
 
-    <main class="quiz-page">
+    <main class="pagina-quiz">
         <!-- Bloco de apresentacao do quiz -->
-        <section class="quiz-hero">
-            <p class="quiz-kicker">Quiz de personalidade</p>
+        <section class="cabecalho-quiz">
+            <p class="rotulo-quiz">Quiz de personalidade</p>
             <h2>Qual album da Ariana Grande combina com voce?</h2>
             <p>
                 Responda as 15 perguntas e descubra qual era da Ariana mais combina com sua forma
@@ -42,22 +42,22 @@
         </section>
 
         <!-- Bloco onde as perguntas serao criadas pelo JavaScript -->
-        <section class="quiz-card">
-            <div class="quiz-topo-card">
+        <section class="caixa-quiz">
+            <div class="topo-quiz">
                 <h3>Responda com sinceridade</h3>
-                <span class="quiz-total">15 perguntas</span>
+                <span class="total-quiz">15 perguntas</span>
             </div>
 
-            <form class="quiz-formulario"></form>
+            <form class="formulario-quiz"></form>
 
-            <div class="quiz-acoes">
+            <div class="botoes-quiz">
                 <button class="botao" type="button" onclick="finalizarQuiz()">Ver resultado</button>
                 <button class="botao botao-secundario" type="button" onclick="reiniciarQuiz()">Refazer</button>
             </div>
         </section>
 
         <!-- Bloco onde o resultado final aparece -->
-        <section class="quiz-resultado oculto">
+        <section class="resultado-quiz oculto">
             <p class="resultado-kicker">Seu resultado</p>
             <h3 class="resultado-album"></h3>
             <div class="resultado-capa">
@@ -257,7 +257,7 @@
             ES: {
                 nome: "Eternal Sunshine",
                 significado: "profundidade e autoconhecimento",
-                capa: "./img/eternal-sunshine-album.jpg"
+                capa: "./img/capa album eternal sunshine.jpg"
             }
         };
 
@@ -266,22 +266,22 @@
             Assim o HTML fica menor e mais facil de editar.
         */
         function renderizarPerguntas() {
-            let formulario = document.querySelector(".quiz-formulario");
+            let formulario = document.querySelector(".formulario-quiz");
             formulario.innerHTML = "";
 
             for (let i = 0; i < perguntas.length; i++) {
                 let pergunta = perguntas[i];
                 let bloco = document.createElement("article");
 
-                bloco.className = "pergunta-card";
+                bloco.className = "cartao-pergunta";
                 bloco.innerHTML = `
                     <h4>${pergunta.titulo}</h4>
-                    <div class="pergunta-opcoes"></div>
+                    <div class="opcoes-pergunta"></div>
                 `;
 
                 formulario.appendChild(bloco);
 
-                let opcoesContainer = bloco.querySelector(".pergunta-opcoes");
+                let opcoesContainer = bloco.querySelector(".opcoes-pergunta");
 
                 for (let j = 0; j < pergunta.opcoes.length; j++) {
                     let opcao = pergunta.opcoes[j];
@@ -384,7 +384,7 @@
             Mostra o resultado na tela com o album vencedor e o placar completo.
         */
         function mostrarResultado(albumFinal, pontos) {
-            let resultado = document.querySelector(".quiz-resultado");
+            let resultado = document.querySelector(".resultado-quiz");
             let titulo = document.querySelector(".resultado-album");
             let capa = document.querySelector(".resultado-capa-img");
             let nomeCompleto = document.querySelector(".resultado-album-completo");
@@ -464,7 +464,7 @@
         */
         function reiniciarQuiz() {
             let radios = document.querySelectorAll('input[type="radio"]');
-            let resultado = document.querySelector(".quiz-resultado");
+            let resultado = document.querySelector(".resultado-quiz");
 
             for (let i = 0; i < radios.length; i++) {
                 radios[i].checked = false;

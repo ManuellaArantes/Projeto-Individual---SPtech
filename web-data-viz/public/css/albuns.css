@@ -1,12 +1,12 @@
 /* albuns.css */
 
-.pagina-discografia {
+.pagina-albuns {
     position: relative;
     color: #333;
     padding-bottom: 72px;
 }
 
-.faixa-cor-discografia {
+.faixa-albuns {
     position: absolute;
     top: 0;
     left: 50%;
@@ -19,7 +19,7 @@
     z-index: 0;
 }
 
-.cabecalho-discografia {
+.cabecalho-albuns {
     position: relative;
     z-index: 1;
     max-width: 1000px;
@@ -27,7 +27,7 @@
     padding: 46px 5% 24px;
 }
 
-.cabecalho-discografia h2 {
+.cabecalho-albuns h2 {
     font-size: 3.8rem;
     font-weight: 800;
     color: #000;
@@ -36,7 +36,7 @@
     letter-spacing: -2px;
 }
 
-.cabecalho-discografia p {
+.cabecalho-albuns p {
     font-size: 1rem;
     color: #888;
     margin: 0;
@@ -81,7 +81,7 @@
     flex-direction: column;
 }
 
-.ano-lancamento {
+.ano-album {
     font-size: 0.82rem;
     color: #666;
     letter-spacing: 2px;
@@ -112,7 +112,7 @@
     margin-bottom: 20px;
 }
 
-.area-avaliacao-spotify {
+.area-album {
     display: flex;
     gap: 30px;
     align-items: center;
@@ -120,13 +120,13 @@
     margin-bottom: 20px;
 }
 
-.bloco-avaliacao {
+.bloco-nota {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.rotulo-avaliacao {
+.texto-nota {
     font-size: 0.9rem;
     color: #555;
     text-transform: uppercase;
@@ -134,7 +134,7 @@
     font-weight: 600;
 }
 
-.botoes-estrela button {
+.estrelas button {
     background: none;
     border: none;
     font-size: 2.2rem;
@@ -145,11 +145,11 @@
     margin-right: 5px;
 }
 
-.botoes-estrela button:hover {
+.estrelas button:hover {
     transform: scale(1.1);
 }
 
-.topo-previa-spotify {
+.topo-spotify {
     margin-top: 18px;
     margin-bottom: 10px;
     display: flex;
@@ -157,7 +157,7 @@
     align-items: center;
 }
 
-.titulo-previa {
+.titulo-spotify {
     font-size: 0.9rem;
     color: #555;
     text-transform: uppercase;
@@ -165,7 +165,7 @@
     font-weight: 600;
 }
 
-.link-abrir-spotify {
+.link-spotify {
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: underline;
@@ -189,7 +189,7 @@
         flex: 0 0 auto;
         width: 100%;
     }
-    .cabecalho-discografia h2 {
+    .cabecalho-albuns h2 {
         font-size: 2.8rem;
     }
 }

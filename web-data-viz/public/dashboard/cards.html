@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <link rel="shortcut icon" href="../img/logo.jpg?v=5" type="image/x-icon">
@@ -29,14 +29,14 @@
         </div>
     </header>
 
-    <main class="dashboard-page">
-        <section class="dashboard-hero">
+    <main class="pagina-dashboard">
+        <section class="cabecalho-dashboard">
             <div>
-                <p class="dashboard-kicker">Última atualização</p>
-                <span class="dashboard-data">Maio 2026</span>
+                <p class="rotulo-dashboard">Última atualização</p>
+                <span class="data-dashboard">Maio 2026</span>
             </div>
 
-            <div class="dashboard-titulos">
+            <div class="titulos-dashboard">
                 <h2>ARIANA GRANDE</h2>
                 <h3>DASHBOARD</h3>
                 <p>Gráficos do quiz, números de popularidade e uma visão geral da carreira da Ariana Grande.</p>
@@ -44,41 +44,41 @@
         </section>
 
         <!-- Cards do inicio -->
-        <section class="metricas-grid">
-            <article class="metrica-card">
+        <section class="grade-metricas">
+            <article class="cartao-metrica">
                 <span>TOTAL DE STREAMS</span>
                 <strong>85B+</strong>
                 <p>+12% no último ciclo</p>
             </article>
 
-            <article class="metrica-card">
+            <article class="cartao-metrica">
                 <span>OUVINTES MENSAIS</span>
                 <strong>380M+</strong>
                 <p>+8% em plataformas</p>
             </article>
 
-            <article class="metrica-card">
+            <article class="cartao-metrica">
                 <span>PRÊMIOS TOTAIS</span>
                 <strong>470+</strong>
                 <p>Reconhecimento mundial</p>
             </article>
 
-            <article class="metrica-card">
+            <article class="cartao-metrica">
                 <span>ÁLBUNS DE ESTÚDIO</span>
                 <strong>7</strong>
                 <p>Último: 2024</p>
             </article>
         </section>
 
-        <section class="dashboard-bloco branco">
-            <div class="bloco-topo">
+        <section class="bloco-dashboard branco">
+            <div class="topo-bloco">
                 <div>
                     <h3>Seu resultado no quiz</h3>
                     <p>Esse gráfico muda de acordo com o último quiz salvo por você.</p>
                 </div>
 
                  <!-- Nome do usuário logado aparece aqui -->
-                <div class="bloco-usuario">
+                <div class="usuario-bloco">
                     <span class="nome-usuario-header">-</span>
                     <small>Usuário logado</small>
                 </div>
@@ -86,47 +86,47 @@
 
             <!-- Card do resultado do quiz aparece aqui -->
 
-            <div class="resultado-hero"></div>
+            <div class="area-resultado"></div>
 
-            <div class="grafico-area">
+            <div class="area-grafico">
                 <canvas class="grafico-quiz"></canvas>
             </div>
         </section>
 
        
-        <section class="dashboard-bloco branco">
+        <section class="bloco-dashboard branco">
             <h3>Vendas estimadas por álbum</h3>
             <p>Uma visão comparativa inspirada no desempenho das eras de estúdio.</p>
 
-            <div class="grafico-area">
+            <div class="area-grafico">
                 <canvas class="grafico-vendas"></canvas>
             </div>
         </section>
 
-        <section class="dashboard-duplo">
-            <article class="dashboard-bloco branco">
+        <section class="grade-dupla">
+            <article class="bloco-dashboard branco">
                 <h3>Mix de gêneros</h3>
                 <p>Distribuição aproximada dos estilos que mais aparecem na discografia.</p>
 
-                <div class="grafico-area pequeno">
+                <div class="area-grafico pequeno">
                     <canvas class="grafico-generos"></canvas>
                 </div>
             </article>
 
-            <article class="dashboard-bloco preto">
+            <article class="bloco-dashboard preto">
                 <h3>Distribuição de plataformas</h3>
                 <p>Participação aproximada das plataformas no consumo digital.</p>
 
-                <div class="grafico-area pequeno">
+                <div class="area-grafico pequeno">
                     <canvas class="grafico-plataformas"></canvas>
                 </div>
             </article>
         </section>
 
-        <section class="dashboard-bloco branco insights">
+        <section class="bloco-dashboard branco insights">
             <h3>Principais insights</h3>
 
-            <div class="insights-grid">
+            <div class="grade-insights">
                 <article>
                     <strong>Melhor fase comercial</strong>
                     <p>"thank u, next" segue como uma das eras mais fortes em impacto e identificação cultural.</p>
@@ -160,7 +160,7 @@
             "Sweetener": { capa: "../img/Sweetener.jpg", cor: "#f4b387" },
             "Thank U, Next": { capa: "../img/thank_you_next.jpg", cor: "#d39be8" },
             "Positions": { capa: "../img/positions.jpg", cor: "#d8c273" },
-            "Eternal Sunshine": { capa: "../img/eternal-sunshine-album.jpg", cor: "#ee9a63" }
+            "Eternal Sunshine": { capa: "../img/capa album eternal sunshine.jpg", cor: "#ee9a63" }
         };
 
         let graficoQuiz = null;
@@ -206,16 +206,16 @@
         }
 
         function preencherResultado(dados) {
-            let areaResultado = document.querySelector(".resultado-hero");
+            let areaResultado = document.querySelector(".area-resultado");
             let nomeUsuario = document.querySelector(".nome-usuario-header");
 
             nomeUsuario.textContent = sessionStorage.NOME_USUARIO;
 
             areaResultado.innerHTML = `
-                <div class="resultado-card" style="--cor-album:${albuns[dados.album_final].cor}">
+                <div class="cartao-resultado" style="--cor-album:${albuns[dados.album_final].cor}">
                     <img src="${albuns[dados.album_final].capa}" alt="Capa do álbum ${dados.album_final}">
                     <div>
-                        <span class="resultado-label">Álbum vencedor</span>
+                        <span class="texto-resultado">Álbum vencedor</span>
                         <strong>${dados.album_final}</strong>
                         <p>Esse foi o resultado salvo no seu último quiz.</p>
                     </div>
@@ -224,7 +224,7 @@
         }
 
         function mostrarSemResultado() {
-            let areaResultado = document.querySelector(".resultado-hero");
+            let areaResultado = document.querySelector(".area-resultado");
             let nomeUsuario = document.querySelector(".nome-usuario-header");
 
             nomeUsuario.textContent = sessionStorage.NOME_USUARIO;
@@ -387,7 +387,6 @@
 </body>
 
 </html>
-
 
 
 

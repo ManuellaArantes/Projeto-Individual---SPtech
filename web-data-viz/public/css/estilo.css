@@ -337,13 +337,13 @@ a {
   padding: 72px 0 96px;
 }
 
-.alerta_erro {
+.alerta-erro {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.card_erro {
+.card-erro {
   display: none;
   background: #fff2ea;
   border: 1px solid #f2b98f;
@@ -423,7 +423,7 @@ a {
   filter: saturate(1.04);
 }
 
-.loading-div {
+.carregando {
   display: none;
   justify-content: center;
   padding-top: 18px;
@@ -439,13 +439,13 @@ a {
   padding-top: 14px;
 }
 
-.auth-switch {
+.texto-troca {
   margin: 22px 0 0;
   text-align: center;
   color: var(--text-soft);
 }
 
-.auth-switch a {
+.texto-troca a {
   color: var(--brown-strong);
   font-weight: 700;
 }
