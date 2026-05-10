@@ -36,7 +36,7 @@
             <p class="rotulo-quiz">Quiz de personalidade</p>
             <h2>Qual album da Ariana Grande combina com voce?</h2>
             <p>
-                Responda as 15 perguntas e descubra qual era da Ariana mais combina com sua forma
+                Responda as 10 perguntas e descubra qual era da Ariana mais combina com sua forma
                 de amar, sentir, reagir e crescer.
             </p>
         </section>
@@ -45,28 +45,23 @@
         <section class="caixa-quiz">
             <div class="topo-quiz">
                 <h3>Responda com sinceridade</h3>
-                <span class="total-quiz">15 perguntas</span>
+                <span class="total-quiz">10 perguntas</span>
             </div>
 
             <form class="formulario-quiz"></form>
 
             <div class="botoes-quiz">
-                <button class="botao" type="button" onclick="finalizarQuiz()">Ver resultado</button>
+                <button class="botao" type="button" onclick="finalizarQuiz()">Finalizar quiz</button>
                 <button class="botao botao-secundario" type="button" onclick="reiniciarQuiz()">Refazer</button>
             </div>
         </section>
 
         <!-- Bloco onde o resultado final aparece -->
         <section class="resultado-quiz oculto">
-            <p class="resultado-kicker">Seu resultado</p>
+            <p class="resultado-kicker">Resultado salvo</p>
             <h3 class="resultado-album"></h3>
-            <div class="resultado-capa">
-                <img class="resultado-capa-img" src="" alt="Capa do album resultado do quiz">
-            </div>
-            <p class="resultado-album-completo"></p>
             <p class="resultado-significado"></p>
-
-            <div class="resultado-pontos"></div>
+            <a class="botao botao-dashboard" href="./dashboard/cards.html">Ver resultado</a>
         </section>
     </main>
 
@@ -83,138 +78,93 @@
         */
         let perguntas = [
             {
-                titulo: "1. Como voce ama?",
+                titulo: "1. Qual frase combina mais com voce?",
                 opcoes: [
-                    { letra: "A", texto: "Entrego tudo, acredito em amor puro", forte: "YT", secundaria: "ME" },
-                    { letra: "B", texto: "Amo intensamente, mesmo sendo complicado", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Amo com confianca e desejo", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Amo com consciencia e maturidade", forte: "POS", secundaria: "ES" }
+                    { letra: "A", texto: "Gosto de romantismo e sentimentos leves", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Gosto de energia pop, mudanca e movimento", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Gosto de independencia e atitude", forte: "DW", secundaria: "TUN" },
+                    { letra: "D", texto: "Gosto de pensar, curar e entender tudo com calma", forte: "ES", secundaria: "POS" }
                 ]
             },
             {
-                titulo: "2. Como voce reage a decepcoes?",
+                titulo: "2. Em uma fase dificil, voce prefere:",
                 opcoes: [
-                    { letra: "A", texto: "Fico triste, mas continuo acreditando", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Tento seguir em frente rapido", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Me fortaleço e nao volto atras", forte: "DW", secundaria: "TUN" },
-                    { letra: "D", texto: "Reflito, aprendo e evoluo", forte: "ES", secundaria: "SW" }
+                    { letra: "A", texto: "Acreditar que ainda existe algo bom", forte: "SW", secundaria: "YT" },
+                    { letra: "B", texto: "Sair, ouvir musica alta e distrair a mente", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Transformar a dor em forca", forte: "TUN", secundaria: "DW" },
+                    { letra: "D", texto: "Ficar mais quieta e refletir sobre tudo", forte: "ES", secundaria: "POS" }
                 ]
             },
             {
-                titulo: "3. Sua energia atual:",
+                titulo: "3. Qual estilo musical mais te prende?",
                 opcoes: [
-                    { letra: "A", texto: "Leve e sonhadora", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Intensa e caotica", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Poderosa e segura", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Calma e introspectiva", forte: "ES", secundaria: "POS" }
+                    { letra: "A", texto: "R&B romantico e voz bem destacada", forte: "YT", secundaria: "POS" },
+                    { letra: "B", texto: "Pop grande, refrao chiclete e clima de hit", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Pop com cura, luz e producao diferente", forte: "SW", secundaria: "ES" },
+                    { letra: "D", texto: "Musicas mais intimas e confessionais", forte: "TUN", secundaria: "ES" }
                 ]
             },
             {
-                titulo: "4. O que mais te define?",
+                titulo: "4. Sobre amor, voce se identifica mais com:",
                 opcoes: [
-                    { letra: "A", texto: "Emocao", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Adaptacao", forte: "ME", secundaria: "POS" },
-                    { letra: "C", texto: "Independencia", forte: "DW", secundaria: "TUN" },
-                    { letra: "D", texto: "Consciencia emocional", forte: "ES", secundaria: "SW" }
+                    { letra: "A", texto: "Primeiro amor e sentimento sincero", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Paixao intensa e muita confianca", forte: "DW", secundaria: "POS" },
+                    { letra: "C", texto: "Amor que tambem precisa de autocuidado", forte: "TUN", secundaria: "SW" },
+                    { letra: "D", texto: "Amor maduro, tranquilo e mais privado", forte: "POS", secundaria: "ES" }
                 ]
             },
             {
-                titulo: "5. Em um relacionamento, voce:",
+                titulo: "5. Qual visual voce escolheria?",
                 opcoes: [
-                    { letra: "A", texto: "Idealiza muito", forte: "YT", secundaria: "ME" },
-                    { letra: "B", texto: "Vive intensamente o presente", forte: "ME", secundaria: "POS" },
-                    { letra: "C", texto: "Se coloca em primeiro lugar", forte: "DW", secundaria: "TUN" },
-                    { letra: "D", texto: "Busca equilibrio e crescimento", forte: "POS", secundaria: "ES" }
+                    { letra: "A", texto: "Delicado, fofo e romantico", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Fashion, brilhante e bem pop star", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Preto, rosa, forte e marcante", forte: "TUN", secundaria: "DW" },
+                    { letra: "D", texto: "Minimalista, elegante e mais adulto", forte: "ES", secundaria: "POS" }
                 ]
             },
             {
-                titulo: "6. Seu maior aprendizado na vida:",
+                titulo: "6. Quando voce pensa no futuro, voce quer:",
                 opcoes: [
-                    { letra: "A", texto: "Amar e arriscar", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Nem tudo dura, e tudo bem", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Eu sou suficiente sozinha", forte: "DW", secundaria: "TUN" },
-                    { letra: "D", texto: "Tudo faz parte da evolucao", forte: "ES", secundaria: "SW" }
+                    { letra: "A", texto: "Viver algo bonito e especial", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Crescer e conquistar muita coisa", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Ficar bem comigo mesma", forte: "TUN", secundaria: "SW" },
+                    { letra: "D", texto: "Ter paz e entender meus sentimentos", forte: "ES", secundaria: "POS" }
                 ]
             },
             {
-                titulo: "7. Sua estetica:",
+                titulo: "7. Em uma playlist, voce colocaria primeiro:",
                 opcoes: [
-                    { letra: "A", texto: "Delicada, romantica, vintage", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Versatil, trendy, mutavel", forte: "ME", secundaria: "POS" },
-                    { letra: "C", texto: "Sexy, dark, marcante", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Clean, sofisticada, introspectiva", forte: "ES", secundaria: "SW" }
+                    { letra: "A", texto: "Uma musica doce para cantar junto", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Uma musica animada de show", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Uma musica para superar alguem", forte: "TUN", secundaria: "ES" },
+                    { letra: "D", texto: "Uma musica calma e sensual", forte: "POS", secundaria: "ES" }
                 ]
             },
             {
-                titulo: "8. Como voce lida com sua propria mente?",
+                titulo: "8. Qual palavra te representa hoje?",
                 opcoes: [
-                    { letra: "A", texto: "Sinto tudo profundamente", forte: "YT", secundaria: "TUN" },
-                    { letra: "B", texto: "Oscilo bastante", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Tento manter controle", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Observo e analiso meus sentimentos", forte: "ES", secundaria: "SW" }
+                    { letra: "A", texto: "Sonho", forte: "YT", secundaria: "SW" },
+                    { letra: "B", texto: "Mudanca", forte: "ME", secundaria: "TUN" },
+                    { letra: "C", texto: "Poder", forte: "DW", secundaria: "POS" },
+                    { letra: "D", texto: "Clareza", forte: "ES", secundaria: "SW" }
                 ]
             },
             {
-                titulo: "9. Escolha uma frase:",
+                titulo: "9. Qual tipo de letra voce prefere?",
                 opcoes: [
-                    { letra: "A", texto: "Quero amar sem medo", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Estou vivendo varias versoes de mim", forte: "ME", secundaria: "POS" },
-                    { letra: "C", texto: "Eu sei exatamente quem eu sou", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Estou me entendendo melhor a cada dia", forte: "ES", secundaria: "TUN" }
+                    { letra: "A", texto: "Letra romantica e inocente", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Letra de autoestima e confianca", forte: "DW", secundaria: "TUN" },
+                    { letra: "C", texto: "Letra sobre cura e seguir em frente", forte: "SW", secundaria: "TUN" },
+                    { letra: "D", texto: "Letra sobre memoria, termino e amadurecimento", forte: "ES", secundaria: "POS" }
                 ]
             },
             {
-                titulo: "10. Seu momento atual:",
+                titulo: "10. Escolha uma vibe final:",
                 opcoes: [
-                    { letra: "A", texto: "Primeiros amores e sentimentos intensos", forte: "YT", secundaria: "ME" },
-                    { letra: "B", texto: "Mudancas e descobertas", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Autoconfianca e poder pessoal", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Reflexao e reconstrucao interna", forte: "ES", secundaria: "SW" }
-                ]
-            },
-            {
-                titulo: "11. Como voce lida com mudancas?",
-                opcoes: [
-                    { letra: "A", texto: "Tenho dificuldade, me apego ao que sinto", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Me adapto, mesmo que seja confuso", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Uso a mudanca a meu favor", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Vejo como parte do crescimento", forte: "ES", secundaria: "SW" }
-                ]
-            },
-            {
-                titulo: "12. O que mais te atrai em alguem?",
-                opcoes: [
-                    { letra: "A", texto: "Carinho e conexao emocional", forte: "YT", secundaria: "POS" },
-                    { letra: "B", texto: "Intensidade e emocao", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Confianca e atitude", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Profundidade e compreensao", forte: "ES", secundaria: "SW" }
-                ]
-            },
-            {
-                titulo: "13. Seu maior medo:",
-                opcoes: [
-                    { letra: "A", texto: "Nao ser amada da mesma forma", forte: "YT", secundaria: "ME" },
-                    { letra: "B", texto: "Perder momentos importantes", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Perder o controle da propria vida", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Nao se entender completamente", forte: "ES", secundaria: "SW" }
-                ]
-            },
-            {
-                titulo: "14. Como voce se ve hoje?",
-                opcoes: [
-                    { letra: "A", texto: "Sensivel e apaixonada", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Em constante mudanca", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Forte e independente", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Evoluindo e me conhecendo melhor", forte: "ES", secundaria: "POS" }
-                ]
-            },
-            {
-                titulo: "15. Qual dessas vibes voce mais gosta?",
-                opcoes: [
-                    { letra: "A", texto: "Amor leve e doce", forte: "YT", secundaria: "SW" },
-                    { letra: "B", texto: "Emocoes intensas e imprevisiveis", forte: "ME", secundaria: "TUN" },
-                    { letra: "C", texto: "Poder, confianca e sensualidade", forte: "DW", secundaria: "POS" },
-                    { letra: "D", texto: "Paz, profundidade e autoconhecimento", forte: "ES", secundaria: "SW" }
+                    { letra: "A", texto: "Brilho de inicio de carreira", forte: "YT", secundaria: "ME" },
+                    { letra: "B", texto: "Palco, impacto e hits", forte: "ME", secundaria: "DW" },
+                    { letra: "C", texto: "Superacao com personalidade", forte: "TUN", secundaria: "SW" },
+                    { letra: "D", texto: "Maturidade e paz interior", forte: "ES", secundaria: "POS" }
                 ]
             }
         ];
@@ -381,36 +331,15 @@
         }
 
         /*
-            Mostra o resultado na tela com o album vencedor e o placar completo.
+            Mostra o botao para o usuario abrir a dashboard.
         */
-        function mostrarResultado(albumFinal, pontos) {
+        function mostrarResultado() {
             let resultado = document.querySelector(".resultado-quiz");
             let titulo = document.querySelector(".resultado-album");
-            let capa = document.querySelector(".resultado-capa-img");
-            let nomeCompleto = document.querySelector(".resultado-album-completo");
             let significado = document.querySelector(".resultado-significado");
-            let placar = document.querySelector(".resultado-pontos");
-            let chaves = Object.keys(pontos);
 
-            titulo.textContent = albuns[albumFinal].nome;
-            capa.src = albuns[albumFinal].capa;
-            capa.alt = "Capa do album " + albuns[albumFinal].nome;
-            nomeCompleto.textContent = "Album completo: " + albuns[albumFinal].nome;
-            significado.textContent = "Seu resultado combina com " + albuns[albumFinal].significado + ".";
-            placar.innerHTML = "";
-
-            for (let i = 0; i < chaves.length; i++) {
-                let item = document.createElement("div");
-                item.className = "placar-item";
-                item.innerHTML = `
-                    <div class="placar-capa">
-                        <img src="${albuns[chaves[i]].capa}" alt="Capa do album ${albuns[chaves[i]].nome}">
-                    </div>
-                    <span class="placar-nome">${albuns[chaves[i]].nome}</span>
-                    <span class="placar-valor">${pontos[chaves[i]]} pts</span>
-                `;
-                placar.appendChild(item);
-            }
+            titulo.textContent = "Quiz finalizado!";
+            significado.textContent = "Seu resultado foi salvo. Clique no botao abaixo para ver a dashboard.";
 
             resultado.classList.remove("oculto");
             resultado.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -422,7 +351,7 @@
         function salvarResultadoNoBanco(albumFinal, pontos) {
             let idUsuario = sessionStorage.ID_USUARIO;
 
-            fetch("/resultados-quiz/salvar", {
+            return fetch("/resultados-quiz/salvar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -450,13 +379,15 @@
             let pontos = calcularPontuacao();
 
             if (!pontos) {
-                alert("Responda todas as perguntas antes de ver o resultado.");
+                alert("Responda todas as perguntas antes de finalizar.");
                 return;
             }
 
             let albumFinal = descobrirAlbumFinal(pontos);
-            mostrarResultado(albumFinal, pontos);
-            salvarResultadoNoBanco(albumFinal, pontos);
+
+            salvarResultadoNoBanco(albumFinal, pontos).then(function () {
+                mostrarResultado();
+            });
         }
 
         /*
@@ -479,10 +410,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-

@@ -27,7 +27,7 @@
 
 .cabecalho-quiz p {
     margin: 0;
-    color: var(--text-soft);
+    color: #d6d6d6;
     font-size: 1.05rem;
     line-height: 1.65;
 }
@@ -75,9 +75,9 @@
 }
 
 .cartao-pergunta {
-    background: linear-gradient(180deg, rgba(255, 249, 236, 0.96) 0%, rgba(255, 244, 224, 0.9) 100%);
-    border: 1.5px solid rgba(239, 201, 106, 0.54);
-    border-radius: 22px;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 12px;
     padding: 18px;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
@@ -89,7 +89,7 @@
 
 .cartao-pergunta h4 {
     margin: 0 0 14px;
-    color: var(--brown);
+    color: #111111;
     font-size: 1.12rem;
 }
 
@@ -103,9 +103,9 @@
     align-items: flex-start;
     gap: 10px;
     padding: 12px 14px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(223, 170, 56, 0.24);
+    border-radius: 10px;
+    background: #f5f5f5;
+    border: 1px solid #d8d8d8;
     cursor: pointer;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -122,7 +122,7 @@
 }
 
 .opcao span {
-    color: var(--text-soft);
+    color: #222222;
     line-height: 1.5;
 }
 
@@ -158,81 +158,15 @@
     font-size: clamp(2rem, 4vw, 3rem);
 }
 
-.resultado-capa {
-    display: flex;
-    justify-content: center;
-    margin: 6px 0 14px;
-}
-
-.resultado-capa-img {
-    width: 170px;
-    height: 170px;
-    object-fit: contain;
-    background-color: #fffaf0;
-    border-radius: 24px;
-    border: 4px solid rgba(239, 201, 106, 0.9);
-    box-shadow: var(--shadow-soft);
-}
-
-.resultado-album-completo {
-    margin: 0 0 10px;
-    color: var(--brown);
-    font-size: 1.02rem;
-    font-weight: 700;
-}
-
 .resultado-significado {
     max-width: 620px;
     margin: 0 auto 22px;
-    color: var(--text-soft);
+    color: #333333;
     line-height: 1.65;
 }
 
-.resultado-pontos {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.placar-item {
-    background: linear-gradient(180deg, rgba(255, 249, 236, 0.96) 0%, rgba(255, 238, 201, 0.94) 100%);
-    border: 1.5px solid rgba(239, 201, 106, 0.5);
-    border-radius: 18px;
-    padding: 14px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.placar-capa {
-    width: 82px;
-    height: 82px;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 3px solid rgba(239, 201, 106, 0.86);
-    box-shadow: var(--shadow-soft);
-    margin-bottom: 4px;
-    background-color: #fffaf0;
-}
-
-.placar-capa img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-.placar-nome {
-    color: var(--brown);
-    font-size: 0.98rem;
-    font-weight: 700;
-    line-height: 1.3;
-}
-
-.placar-valor {
-    color: var(--text-soft);
-    font-weight: 700;
+.botao-dashboard {
+    display: inline-block;
 }
 
 .oculto {
@@ -245,9 +179,6 @@
         align-items: flex-start;
     }
 
-    .resultado-pontos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
 }
 
 @media (max-width: 520px) {
@@ -260,7 +191,4 @@
         padding: 22px 16px;
     }
 
-    .resultado-pontos {
-        grid-template-columns: 1fr;
-    }
 }

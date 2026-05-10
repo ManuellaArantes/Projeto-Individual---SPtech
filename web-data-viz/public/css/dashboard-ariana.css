@@ -22,6 +22,30 @@
     font-weight: 700;
 }
 
+.pagina-dashboard {
+    width: min(1250px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 82px;
+    overflow-x: clip;
+}
+
+.cabecalho-dashboard {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 22px;
+}
+
+.rotulo-dashboard {
+    margin: 0 0 8px;
+    color: #7d7d7d;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
 .data-dashboard {
     color: #c8a673;
     font-size: 1.05rem;
@@ -33,18 +57,17 @@
     margin: 0;
     line-height: 0.9;
     letter-spacing: -0.04em;
+    font-weight: 900;
 }
 
 .titulos-dashboard h2 {
     color: #ffffff;
     font-size: clamp(3rem, 8vw, 5.1rem);
-    font-weight: 900;
 }
 
 .titulos-dashboard h3 {
     color: #6f6f6f;
     font-size: clamp(2.6rem, 7vw, 4.5rem);
-    font-weight: 900;
 }
 
 .titulos-dashboard p {
@@ -95,45 +118,21 @@
     font-weight: 700;
 }
 
-.bloco-dashboard {
-    margin-bottom: 20px;
-    padding: 24px 22px;
+.cartao-metrica:nth-child(1) {
+    border-top: 4px solid #1DB954;
 }
 
-.bloco-dashboard.branco {
-    background: #f7f3ef;
-    color: #111111;
+.cartao-metrica:nth-child(2) {
+    border-top: 4px solid #fa586a;
 }
 
-.bloco-dashboard.preto {
-    background: #181818;
-    color: #ffffff;
+.cartao-metrica:nth-child(3) {
+    border-top: 4px solid #f29bd2;
 }
 
-.bloco-dashboard h3 {
-    margin: 0 0 8px;
-    font-size: clamp(1.7rem, 3vw, 2.4rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
+.cartao-metrica:nth-child(4) {
+    border-top: 4px solid #c95c4f;
 }
-
-.bloco-dashboard p {
-    margin: 0 0 18px;
-    font-size: 0.96rem;
-}
-
-.bloco-dashboard.branco p {
-    color: #555555;
-}
-
-.bloco-dashboard.preto p {
-    color: #bdbdbd;
-}
-
-.topo-bloco {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
     align-items: start;
     margin-bottom: 18px;
 }
@@ -178,7 +177,8 @@
     width: 92px;
     height: 92px;
     border-radius: 24px;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #ffffff;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
 }
 

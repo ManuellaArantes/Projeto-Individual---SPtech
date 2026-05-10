@@ -154,14 +154,24 @@
     <script>
         /* BLOCO: mapa visual dos álbuns para exibir capa e cor no resultado do quiz. */
         let albuns = {
-            "Yours Truly": { capa: "../img/Yours Truly.jpg", cor: "#f3a3c4" },
-            "My Everything": { capa: "../img/My Everything.jpg", cor: "#c3b2ff" },
-            "Dangerous Woman": { capa: "../img/Dangerous Woman.jpg", cor: "#4d5366" },
-            "Sweetener": { capa: "../img/Sweetener.jpg", cor: "#f4b387" },
-            "Thank U, Next": { capa: "../img/thank_you_next.jpg", cor: "#d39be8" },
-            "Positions": { capa: "../img/positions.jpg", cor: "#d8c273" },
-            "Eternal Sunshine": { capa: "../img/capa album eternal sunshine.jpg", cor: "#ee9a63" }
+            "Yours Truly": { capa: "../img/Yours Truly.jpg", cor: "#f4a6bd" },
+            "My Everything": { capa: "../img/My Everything.jpg", cor: "#9c9ca8" },
+            "Dangerous Woman": { capa: "../img/Dangerous Woman.jpg", cor: "#2f3038" },
+            "Sweetener": { capa: "../img/Sweetener.jpg", cor: "#d9a66f" },
+            "Thank U, Next": { capa: "../img/thank_you_next.jpg", cor: "#f29bd2" },
+            "Positions": { capa: "../img/positions.jpg", cor: "#7f946c" },
+            "Eternal Sunshine": { capa: "../img/capa album eternal sunshine.jpg", cor: "#c95c4f" }
         };
+
+        let coresAlbuns = [
+            albuns["Yours Truly"].cor,
+            albuns["My Everything"].cor,
+            albuns["Dangerous Woman"].cor,
+            albuns["Sweetener"].cor,
+            albuns["Thank U, Next"].cor,
+            albuns["Positions"].cor,
+            albuns["Eternal Sunshine"].cor
+        ];
 
         let graficoQuiz = null;
         let graficoVendas = null;
@@ -250,7 +260,7 @@
                     datasets: [{
                         label: "Pontos no quiz",
                         data: [dados.yt_pontos, dados.me_pontos, dados.dw_pontos, dados.sw_pontos, dados.tun_pontos, dados.pos_pontos, dados.es_pontos],
-                        backgroundColor: ["#f3a3c4", "#c3b2ff", "#555c73", "#f4b387", "#d39be8", "#d8c273", "#ee9a63"],
+                        backgroundColor: coresAlbuns,
                         borderRadius: 14
                     }]
                 },
@@ -284,10 +294,7 @@
 
         function montarGraficoVendas() {
             let canvas = document.querySelector(".grafico-vendas");
-
-            if (graficoVendas) {
-                graficoVendas.destroy();
-            }
+            if (graficoVendas) graficoVendas.destroy();
 
             graficoVendas = new Chart(canvas, {
                 type: "bar",
@@ -296,26 +303,16 @@
                     datasets: [{
                         label: "Vendas estimadas (milhares)",
                         data: [500, 1000, 1500, 800, 2000, 1200, 900],
-                        backgroundColor: "#111111",
+                        backgroundColor: coresAlbuns,
                         borderRadius: 8
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
-                        x: {
-                            ticks: {
-                                maxRotation: 30,
-                                minRotation: 0,
-                                autoSkip: true
-                            }
-                        }
+                        x: { ticks: { maxRotation: 30, minRotation: 0, autoSkip: true } }
                     }
                 }
             });
@@ -323,10 +320,7 @@
 
         function montarGraficoGeneros() {
             let canvas = document.querySelector(".grafico-generos");
-
-            if (graficoGeneros) {
-                graficoGeneros.destroy();
-            }
+            if (graficoGeneros) graficoGeneros.destroy();
 
             graficoGeneros = new Chart(canvas, {
                 type: "doughnut",
@@ -334,8 +328,31 @@
                     labels: ["Pop", "R&B", "Dance", "Ballad"],
                     datasets: [{
                         data: [45, 30, 15, 10],
-                        backgroundColor: ["#111111", "#565656", "#808080", "#b3b3b3"],
-                        borderColor: "#ffffff",
+                        backgroundColor: ["#f4a6bd", "#c8a2c8", "#ffc0cb", "#e6e6fa"],
+                        borderColor: "transparent",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: "bottom" } }
+                }
+            });
+        }
+
+        function montarGraficoPlataformas() {
+            let canvas = document.querySelector(".grafico-plataformas");
+            if (graficoPlataformas) graficoPlataformas.destroy();
+
+            graficoPlataformas = new Chart(canvas, {
+                type: "doughnut",
+                data: {
+                    labels: ["Spotify", "Apple Music", "YouTube", "Amazon Music", "Outros"],
+                    datasets: [{
+                        data: [40, 25, 20, 10, 5],
+                        backgroundColor: ["#b185db", "#c8a2c8", "#d8a4b1", "#e6c1c8", "#f4a6bd"],
+                        borderColor: "transparent",
                         borderWidth: 1
                     }]
                 },
@@ -344,40 +361,8 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: "bottom"
-                        }
-                    }
-                }
-            });
-        }
-
-        function montarGraficoPlataformas() {
-            let canvas = document.querySelector(".grafico-plataformas");
-
-            if (graficoPlataformas) {
-                graficoPlataformas.destroy();
-            }
-
-            graficoPlataformas = new Chart(canvas, {
-                type: "doughnut",
-                data: {
-                    labels: ["Spotify", "Apple Music", "YouTube", "Amazon Music", "Outros"],
-                    datasets: [{
-                        data: [40, 25, 20, 10, 5],
-                        backgroundColor: ["#f5f5f5", "#b0b0b0", "#8d8d8d", "#666666", "#3d3d3d"],
-                        borderColor: "#181818",
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
                             position: "bottom",
-                            labels: {
-                                color: "#f5f5f5"
-                            }
+                            labels: { color: "#f5f5f5" }
                         }
                     }
                 }
@@ -387,8 +372,6 @@
 </body>
 
 </html>
-
-
 
 
 

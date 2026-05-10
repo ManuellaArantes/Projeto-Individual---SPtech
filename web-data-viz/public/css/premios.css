@@ -53,6 +53,7 @@
     min-height: 360px;
     overflow: hidden;
     border-radius: 8px;
+    background-color: #ffffff;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
@@ -62,7 +63,8 @@
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #ffffff;
 }
 
 .resumo-premios {
@@ -132,6 +134,7 @@
 
 .imagem-destaque {
     min-height: 360px;
+    background-color: #ffffff;
 }
 
 .lista-premios {
