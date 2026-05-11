@@ -1,6 +1,7 @@
 var database = require("../database/config");
 
 function autenticar(email, senha) {
+    //serve para conferir se tem alguem com x email e x senha
     var instrucaoSql = `
         SELECT id, nome, email
         FROM usuario
@@ -12,6 +13,7 @@ function autenticar(email, senha) {
 }
 
 function buscarPorEmail(email) {
+
     var instrucaoSql = `
         SELECT id, nome, email
         FROM usuario
@@ -23,6 +25,7 @@ function buscarPorEmail(email) {
 }
 
 function cadastrar(nome, email, senha) {
+    // se tudo estiver okay - insre o novo user na tabela
     var instrucaoSql = `
         INSERT INTO usuario (nome, email, senha)
         VALUES ('${nome}', '${email}', '${senha}');

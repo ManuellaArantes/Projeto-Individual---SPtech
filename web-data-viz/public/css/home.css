@@ -50,7 +50,7 @@
 
 
 
-/* BLOCO: introdução sobre a artista */
+/* Introdução sobre a artista */
 .intro-home {
     background-color: #1a1a1a;
     padding: 64px 5%;
@@ -110,7 +110,7 @@
     color: #000;
 }
 
-/* BLOCO: seções com fundo claro */
+/* Seções com fundo claro */
 .sobre-home, .favoritos-home {
     background-color: #ffffff;
     padding: 72px 5%;
@@ -138,7 +138,7 @@
     margin-bottom: 60px;
 }
 
-/* BLOCO: grade de cards de imagem sem corte lateral */
+/* Grade de cards de imagem sem corte lateral */
 .grade-cartoes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -175,7 +175,7 @@
     word-break: break-word;
 }
 
-/* BLOCO: visuais e eras */
+/* Visuais e eras */
 .visuais-home {
     background-color: #0a0a0a;
     padding: 72px 5%;
@@ -287,7 +287,7 @@
     border: 2px solid #333;
 }
 
-/* BLOCO: cabeçalho da seção de favoritos */
+/* Cabeçalho da seção de favoritos */
 .topo-favoritos {
     display: flex;
     justify-content: space-between;

@@ -80,7 +80,7 @@
 </html>
 
 <script>
-    /* BLOCO: valida credenciais, autentica usuário e salva sessão local. */
+    /* Validar credenciais*/
     function entrar() {
         aguardar();
 
@@ -96,6 +96,7 @@
             setTimeout(sumirMensagem, 5000);
         }
 
+        // fetch - serve para realizar requisição http - json
         fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -129,7 +130,7 @@
         return false;
     }
 
-    /* BLOCO: remove mensagens temporárias da tela de login. */
+    /* Remove mensagens temporárias da tela de login. */
     function sumirMensagem() {
         cardErro.style.display = "none";
     }

@@ -15,7 +15,8 @@
 </head>
 
 <body onload="validarAcessoRestrito()">
-    <!-- Cabecalho compartilhado do site -->
+ 
+    
     <header class="header">
         <div class="header-container">
             <a class="logo" href="./index.html">ARIANA GRANDE</a>
@@ -31,7 +32,7 @@
     </header>
 
     <main class="pagina-quiz">
-        <!-- Bloco de apresentacao do quiz -->
+        <!-- apresentacao do quiz -->
         <section class="cabecalho-quiz">
             <p class="rotulo-quiz">Quiz de personalidade</p>
             <h2>Qual album da Ariana Grande combina com voce?</h2>
@@ -41,7 +42,7 @@
             </p>
         </section>
 
-        <!-- Bloco onde as perguntas serao criadas pelo JavaScript -->
+        <!-- onde as perguntas serao criadas pelo Js -->
         <section class="caixa-quiz">
             <div class="topo-quiz">
                 <h3>Responda com sinceridade</h3>
@@ -56,7 +57,7 @@
             </div>
         </section>
 
-        <!-- Bloco onde o resultado final aparece -->
+        <!-- onde o resultado final aparece -->
         <section class="resultado-quiz oculto">
             <p class="resultado-kicker">Resultado salvo</p>
             <h3 class="resultado-album"></h3>
@@ -72,10 +73,7 @@
     </footer>
 
     <script>
-        /*
-            Dados principais do quiz.
-            Cada pergunta tem 4 respostas e cada resposta soma pontos em dois albuns.
-        */
+ 
         let perguntas = [
             {
                 titulo: "1. Qual frase combina mais com voce?",
@@ -169,10 +167,7 @@
             }
         ];
 
-        /*
-            Informacoes finais de cada album.
-            Esse bloco serve para mostrar o nome completo e o significado no resultado.
-        */
+  
         let albuns = {
             YT: {
                 nome: "Yours Truly",
@@ -211,10 +206,7 @@
             }
         };
 
-        /*
-            Cria todas as perguntas do quiz na tela.
-            Assim o HTML fica menor e mais facil de editar.
-        */
+      
         function renderizarPerguntas() {
             let formulario = document.querySelector(".formulario-quiz");
             formulario.innerHTML = "";
@@ -248,18 +240,18 @@
             }
         }
 
-        /*
-            Lê as respostas marcadas e soma os pontos de cada album.
-        */
+       
+           //  os pontos de cada album.
+        
         function calcularPontuacao() {
             let pontos = {
-                YT: 0,
-                ME: 0,
-                DW: 0,
-                SW: 0,
-                TUN: 0,
-                POS: 0,
-                ES: 0
+                YT: 0, // yours trully
+                ME: 0, // my everything
+                DW: 0, // dangerous woman
+                SW: 0,  // sweetener
+                TUN: 0,  // thank u, next
+                POS: 0, // positions
+                ES: 0  // eternal sunshine
             };
 
             for (let i = 0; i < perguntas.length; i++) {
@@ -278,9 +270,7 @@
         }
 
         /*
-            Resolve empates usando as regras passadas no enunciado.
-            O criterio da TUN foi mantido como prioridade em empate,
-            porque ela representa superacao e independencia.
+            Resolve empates
         */
         function resolverEmpate(empatados) {
             if (empatados.includes("TUN")) {
@@ -303,7 +293,7 @@
         }
 
         /*
-            Descobre qual album venceu com base na pontuacao final.
+             qual album venceu com base na pontuacao final.
         */
         function descobrirAlbumFinal(pontos) {
             let chaves = Object.keys(pontos);
@@ -330,9 +320,9 @@
             return resolverEmpate(empatados);
         }
 
-        /*
-            Mostra o botao para o usuario abrir a dashboard.
-        */
+        
+           // botao para o usuario abrir a dashboard.
+        
         function mostrarResultado() {
             let resultado = document.querySelector(".resultado-quiz");
             let titulo = document.querySelector(".resultado-album");
@@ -345,9 +335,8 @@
             resultado.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
-        /*
-            Salva o ultimo resultado do quiz no banco para a dashboard usar depois.
-        */
+        
+            // Salva o ultimo resultado do quiz no banco 
         function salvarResultadoNoBanco(albumFinal, pontos) {
             let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -372,9 +361,9 @@
             });
         }
 
-        /*
-            Funcao chamada no botao principal para validar e finalizar o quiz.
-        */
+        
+           // validar e finalizar o quiz.
+        
         function finalizarQuiz() {
             let pontos = calcularPontuacao();
 
@@ -390,18 +379,21 @@
             });
         }
 
-        /*
-            Limpa todas as respostas e esconde o resultado para o usuario tentar de novo.
-        */
+       
+            // serve p limpara as respostas
+       
         function reiniciarQuiz() {
             let radios = document.querySelectorAll('input[type="radio"]');
             let resultado = document.querySelector(".resultado-quiz");
+
 
             for (let i = 0; i < radios.length; i++) {
                 radios[i].checked = false;
             }
 
+            // esconde os rsultados 
             resultado.classList.add("oculto");
+            // serve para voltar para o topo
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 

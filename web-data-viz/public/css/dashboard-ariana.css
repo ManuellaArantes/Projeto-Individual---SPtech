@@ -22,30 +22,6 @@
     font-weight: 700;
 }
 
-.pagina-dashboard {
-    width: min(1250px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 28px 0 82px;
-    overflow-x: clip;
-}
-
-.cabecalho-dashboard {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 24px;
-    align-items: end;
-    margin-bottom: 22px;
-}
-
-.rotulo-dashboard {
-    margin: 0 0 8px;
-    color: #7d7d7d;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.78rem;
-    font-weight: 700;
-}
-
 .data-dashboard {
     color: #c8a673;
     font-size: 1.05rem;
@@ -85,18 +61,16 @@
 }
 
 .cartao-metrica {
-    position: relative;
-    overflow: hidden;
-    min-height: 154px;
-    background: #181818;
-    border: 1px solid #2c2c2c;
-    border-radius: 0;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .cartao-metrica span {
     display: block;
-    color: #9c9c9c;
+    color: #666666;
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -106,33 +80,51 @@
 .cartao-metrica strong {
     display: block;
     margin: 14px 0 8px;
-    color: #ffffff;
+    color: #111111;
     font-size: clamp(2.2rem, 5vw, 3.2rem);
     font-weight: 900;
 }
 
 .cartao-metrica p {
     margin: 0;
-    color: #47e089;
+    color: #2e8b57;
     font-size: 1rem;
     font-weight: 700;
 }
 
-.cartao-metrica:nth-child(1) {
-    border-top: 4px solid #1DB954;
+.cartao-metrica:nth-child(1) { border-top: 4px solid #E6E6FA; }
+.cartao-metrica:nth-child(2) { border-top: 4px solid #FFBCD9; }
+.cartao-metrica:nth-child(3) { border-top: 4px solid #F7EBDB; }
+.cartao-metrica:nth-child(4) { border-top: 4px solid #D4CFC2; }
+
+.bloco-dashboard {
+    margin-bottom: 24px;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #333333;
 }
 
-.cartao-metrica:nth-child(2) {
-    border-top: 4px solid #fa586a;
+.bloco-dashboard h3 {
+    margin: 0 0 8px;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #111111;
 }
 
-.cartao-metrica:nth-child(3) {
-    border-top: 4px solid #f29bd2;
+.bloco-dashboard p {
+    margin: 0 0 22px;
+    font-size: 1.05rem;
+    color: #555555;
 }
 
-.cartao-metrica:nth-child(4) {
-    border-top: 4px solid #c95c4f;
-}
+.topo-bloco {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
     align-items: start;
     margin-bottom: 18px;
 }
@@ -161,7 +153,7 @@
 
 .cartao-resultado,
 .aviso-vazio {
-    border-radius: 28px;
+    border-radius: 16px;
     padding: 18px;
 }
 
@@ -169,17 +161,17 @@
     display: flex;
     align-items: center;
     gap: 18px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, color-mix(in srgb, var(--cor-album) 28%, white) 100%);
-    border: 1.5px solid color-mix(in srgb, var(--cor-album) 56%, white);
+    background: #fafafa;
+    border: 1px solid #eeeeee;
 }
 
 .cartao-resultado img {
     width: 92px;
     height: 92px;
-    border-radius: 24px;
+    border-radius: 12px;
     object-fit: contain;
     background-color: #ffffff;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .texto-resultado {
@@ -206,22 +198,18 @@
 }
 
 .aviso-vazio {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1.5px dashed #c7b39c;
-    color: #646464;
+    background: #fafafa;
+    border: 1.5px dashed #cccccc;
+    color: #666666;
 }
 
 .area-grafico {
-    background: rgba(255, 255, 255, 0.68);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 24px;
     width: 100%;
     overflow-x: auto;
-}
-
-.bloco-dashboard.preto .area-grafico {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .area-grafico canvas {
@@ -257,20 +245,27 @@
 }
 
 .grade-insights article {
-    border-left: 3px solid #111111;
-    padding-left: 18px;
+    border-left: 4px solid #FFBCD9;
+    padding-left: 20px;
+    background: #fafafa;
+    border-radius: 0 12px 12px 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 12px;
 }
 
 .grade-insights strong {
     display: block;
     margin-bottom: 10px;
     color: #111111;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
 }
 
 .grade-insights p {
     margin: 0;
+    color: #555555;
+    font-size: 0.95rem;
 }
 
 @media (max-width: 980px) {

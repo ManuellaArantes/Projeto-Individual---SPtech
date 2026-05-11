@@ -70,7 +70,7 @@
             </article>
         </section>
 
-        <section class="bloco-dashboard branco">
+        <section class="bloco-dashboard">
             <div class="topo-bloco">
                 <div>
                     <h3>Seu resultado no quiz</h3>
@@ -94,7 +94,7 @@
         </section>
 
        
-        <section class="bloco-dashboard branco">
+        <section class="bloco-dashboard">
             <h3>Vendas estimadas por álbum</h3>
             <p>Uma visão comparativa inspirada no desempenho das eras de estúdio.</p>
 
@@ -104,7 +104,7 @@
         </section>
 
         <section class="grade-dupla">
-            <article class="bloco-dashboard branco">
+            <article class="bloco-dashboard">
                 <h3>Mix de gêneros</h3>
                 <p>Distribuição aproximada dos estilos que mais aparecem na discografia.</p>
 
@@ -113,7 +113,7 @@
                 </div>
             </article>
 
-            <article class="bloco-dashboard preto">
+            <article class="bloco-dashboard">
                 <h3>Distribuição de plataformas</h3>
                 <p>Participação aproximada das plataformas no consumo digital.</p>
 
@@ -123,7 +123,7 @@
             </article>
         </section>
 
-        <section class="bloco-dashboard branco insights">
+        <section class="bloco-dashboard insights">
             <h3>Principais insights</h3>
 
             <div class="grade-insights">
@@ -152,7 +152,7 @@
     </footer>
 
     <script>
-        /* BLOCO: mapa visual dos álbuns para exibir capa e cor no resultado do quiz. */
+        /* Mapa visual dos álbuns para exibir capa e cor no resultado do quiz. */
         let albuns = {
             "Yours Truly": { capa: "../img/Yours Truly.jpg", cor: "#f4a6bd" },
             "My Everything": { capa: "../img/My Everything.jpg", cor: "#9c9ca8" },
@@ -178,7 +178,7 @@
         let graficoGeneros = null;
         let graficoPlataformas = null;
 
-        /* BLOCO: inicializa a dashboard com sessão, resultado do quiz e gráficos gerais. */
+        /* Inicializa a dashboard com sessão, resultado do quiz e gráficos gerais. */
         function carregarDashboard() {
             validarSessao();
             carregarUltimoResultado();
@@ -187,7 +187,7 @@
             montarGraficoPlataformas();
         }
 
-        /* BLOCO: busca o último quiz do usuário logado e atualiza os componentes da tela. */
+        /* Busca o último quiz do usuário logado e atualiza os componentes da tela. */
         function carregarUltimoResultado() {
             let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -362,7 +362,7 @@
                     plugins: {
                         legend: {
                             position: "bottom",
-                            labels: { color: "#f5f5f5" }
+                            labels: { color: "#555555" }
                         }
                     }
                 }

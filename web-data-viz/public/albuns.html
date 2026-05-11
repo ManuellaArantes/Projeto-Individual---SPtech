@@ -27,6 +27,7 @@
                 <a class="link-dashboard" href="./dashboard/cards.html" style="display:none;">DASHBOARD</a>
                 <a class="subscribe-btn link-auth" href="./cadastro.html">CADASTRO</a>
             </nav>
+
         </div>
     </header>
 
@@ -36,6 +37,9 @@
         <section class="cabecalho-albuns">
             <h2>DISCOGRAFIA</h2>
             <p>Uma jornada musical pelos álbuns de estúdio da Ariana Grande.</p>
+            <div id="estatisticas-estrelas" style="margin-top: 15px; font-weight: bold; color: #555;">
+                Média das suas avaliações: <span id="media-estrelas">0.0</span> estrelas
+            </div>
         </section>
 
         <section class="lista-de-albuns"></section>
@@ -60,7 +64,7 @@
                 descricao: "Álbum de estreia que trouxe influências do R&B dos anos 90, com vocais impressionantes e uma vibe nostálgica. Apresentou Ariana ao mundo com sucessos como 'The Way' e 'Baby I'.",
                 classeFonte: "fonte-yours-truly",
                 corDestaque: "#ff8ca3",
-                corFundo: "#fff0f5" /* Rosa muito claro */
+                corFundo: "#fff0f5" 
             },
             {
                 id: "my-everything",
@@ -73,7 +77,7 @@
                 descricao: "Segundo álbum que consolidou Ariana como uma força pop. Com hits como 'Problem', 'Break Free' e 'Love Me Harder', mostrou versatilidade e crescimento artístico.",
                 classeFonte: "fonte-my-everything",
                 corDestaque: "#333333",
-                corFundo: "#f5f5f5" /* Cinza muito claro */
+                corFundo: "#f5f5f5" 
             },
             {
                 id: "dangerous-woman",
@@ -86,7 +90,7 @@
                 descricao: "Marcou uma nova fase mais madura e empoderada. O título dita o tom; Ariana está no controle. 'Into You' e 'Side To Side' dominaram as paradas.",
                 classeFonte: "fonte-dangerous-woman",
                 corDestaque: "#111111",
-                corFundo: "#e8e8e8" /* Cinza suave */
+                corFundo: "#e8e8e8" 
             },
             {
                 id: "sweetener",
@@ -99,7 +103,7 @@
                 descricao: "Vencedor do Grammy, este álbum trouxe experimentação sonora com produção de Pharrell Williams. Músicas como 'no tears left to cry' e 'God is a woman' mostraram resiliência e evolução.",
                 classeFonte: "fonte-sweetener",
                 corDestaque: "#cba885",
-                corFundo: "#fdf5e6" /* Bege claro */
+                corFundo: "#fdf5e6" 
             },
             {
                 id: "thank-u-next",
@@ -112,7 +116,7 @@
                 descricao: "Um dos álbuns mais pessoais e bem-sucedidos, nascido de transformação pessoal. Quebrou recordes com '7 rings' e a faixa-título que se tornou um hino de empoderamento.",
                 classeFonte: "fonte-thank-u-next",
                 corDestaque: "#ff69b4",
-                corFundo: "#ffe4e1" /* Rosa suave */
+                corFundo: "#ffe4e1" 
             },
             {
                 id: "positions",
@@ -125,7 +129,7 @@
                 descricao: "Álbum intimista que explora amor e sensualidade com influências do R&B. Trouxe uma Ariana mais confiante e confortável com sua sexualidade e voz aveludada.",
                 classeFonte: "fonte-positions",
                 corDestaque: "#6e8b6e",
-                corFundo: "#e8f4e8" /* Verde suave */
+                corFundo: "#e8f4e8" 
             },
             {
                 id: "eternal-sunshine",
@@ -138,7 +142,7 @@
                 descricao: "Seu álbum mais recente e introspectivo, inspirado no filme 'Brilho Eterno de uma Mente sem Lembranças'. Explora temas de amor, perda, memória e cura emocional com uma sonoridade etérea e moderna.",
                 classeFonte: "fonte-eternal-sunshine",
                 corDestaque: "#b22222",
-                corFundo: "#ffebe6" /* Laranja/Vermelho claro */
+                corFundo: "#ffebe6" 
             },
             {
                 id: "petal",
@@ -151,21 +155,40 @@
                 descricao: "Aguardando o novo álbum... Um novo capítulo cheio de surpresas na jornada musical de Ariana Grande.",
                 classeFonte: "fonte-petal",
                 corDestaque: "#ff8ca3",
-                corFundo: "#fff0f5" /* Rosa floral claro */
+                corFundo: "#fff0f5" 
             }
         ];
 
-        let chaveLocalStorage = "avaliacoes_albuns_ariana";
+        let avaliacoesTemporarias = {};
 
         function obterAvaliacoesSalvas() {
-            let avaliacoes = localStorage.getItem(chaveLocalStorage);
-            return avaliacoes ? JSON.parse(avaliacoes) : {};
+            return avaliacoesTemporarias;
         }
 
         function salvarAvaliacao(idAlbum, nota) {
-            let avaliacoes = obterAvaliacoesSalvas();
-            avaliacoes[idAlbum] = nota;
-            localStorage.setItem(chaveLocalStorage, JSON.stringify(avaliacoes));
+            avaliacoesTemporarias[idAlbum] = nota;
+            calcularMediaEstrelas();
+        }
+
+        function calcularMediaEstrelas() {
+            let soma = 0;
+            let quantidade = 0;
+            
+           // media de estrelas 
+            for (let i = 0; i < albuns.length; i++) {
+                let idAlbum = albuns[i].id;
+                if (avaliacoesTemporarias[idAlbum] > 0) {
+                    soma = soma + avaliacoesTemporarias[idAlbum];
+                    quantidade = quantidade + 1;
+                }
+            }
+            
+            let media = 0;
+            if (quantidade > 0) {
+                media = soma / quantidade;
+            }
+            
+            document.getElementById("media-estrelas").innerHTML = media.toFixed(1);
         }
 
         function renderizarAlbuns() {
