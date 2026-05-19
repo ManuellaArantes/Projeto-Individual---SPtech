@@ -15,4 +15,8 @@ router.get("/kpis/top-album", function (req, res) {
     avaliacaoAlbumController.buscarKpiAlbumMaisEstrelado(req, res);
 });
 
+router.get("/kpis/medias", function (req, res) {
+    avaliacaoAlbumController.buscarMediasPorAlbum(req, res);
+});
+
 module.exports = router;

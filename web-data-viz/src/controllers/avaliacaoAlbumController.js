@@ -57,8 +57,24 @@ function buscarKpiAlbumMaisEstrelado(req, res) {
         });
 }
 
+function buscarMediasPorAlbum(req, res) {
+    avaliacaoAlbumModel.buscarMediasPorAlbum()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } else {
+                res.status(204).send();
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     salvar,
     buscarPorUsuario,
-    buscarKpiAlbumMaisEstrelado
+    buscarKpiAlbumMaisEstrelado,
+    buscarMediasPorAlbum
 };

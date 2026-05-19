@@ -19,4 +19,8 @@ router.get("/geral/ultimo/:idUsuario", function (req, res) {
     resultadoQuizController.buscarUltimoGeralPorUsuario(req, res);
 });
 
+router.get("/geral/categorias", function (req, res) {
+    resultadoQuizController.buscarDistribuicaoCategoriasGeral(req, res);
+});
+
 module.exports = router;

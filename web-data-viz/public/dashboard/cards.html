@@ -105,8 +105,8 @@
 
         <section class="grade-dupla">
             <article class="bloco-dashboard">
-                <h3>Mix de gêneros</h3>
-                <p>Distribuição aproximada dos estilos que mais aparecem na discografia.</p>
+                <h3>Categorias destaque no quiz geral</h3>
+                <p>Mostra qual categoria aparece mais como melhor resultado entre todos os usuários.</p>
 
                 <div class="area-grafico pequeno">
                     <canvas class="grafico-generos"></canvas>
@@ -114,8 +114,8 @@
             </article>
 
             <article class="bloco-dashboard">
-                <h3>Distribuição de plataformas</h3>
-                <p>Participação aproximada das plataformas no consumo digital.</p>
+                <h3>Média de estrelas por álbum</h3>
+                <p>Média acumulada a partir das avaliações feitas por todos os usuários.</p>
 
                 <div class="area-grafico pequeno">
                     <canvas class="grafico-plataformas"></canvas>
@@ -397,51 +397,139 @@
             let canvas = document.querySelector(".grafico-generos");
             if (graficoGeneros) graficoGeneros.destroy();
 
-            graficoGeneros = new Chart(canvas, {
-                type: "doughnut",
-                data: {
-                    labels: ["Pop", "R&B", "Dance", "Ballad"],
-                    datasets: [{
-                        data: [45, 30, 15, 10],
-                        backgroundColor: ["#f4a6bd", "#c8a2c8", "#ffc0cb", "#e6e6fa"],
-                        borderColor: "transparent",
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: "bottom" } }
-                }
-            });
+            fetch("/resultados-quiz/geral/categorias")
+                .then(function (resposta) {
+                    if (resposta.status == 204) {
+                        return [];
+                    }
+
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+
+                    throw new Error("Erro ao carregar categorias.");
+                })
+                .then(function (dados) {
+                    let labels = ["Sem respostas"];
+                    let valores = [1];
+                    let cores = ["#d8d8d8"];
+
+                    if (dados.length > 0) {
+                        labels = [];
+                        valores = [];
+                        cores = ["#f4a6bd", "#c8a2c8", "#d9a66f", "#7f946c", "#c95c4f"];
+
+                        for (let i = 0; i < dados.length; i++) {
+                            labels.push(dados[i].categoria_destaque);
+                            valores.push(Number(dados[i].total_resultados));
+                        }
+                    }
+
+                    // Monta a distribuicao global das melhores categorias do quiz geral.
+                    graficoGeneros = new Chart(canvas, {
+                        type: "doughnut",
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: valores,
+                                backgroundColor: cores,
+                                borderColor: "transparent",
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: "bottom",
+                                    labels: { color: "#555555" }
+                                }
+                            }
+                        }
+                    });
+                });
         }
 
         function montarGraficoPlataformas() {
             let canvas = document.querySelector(".grafico-plataformas");
             if (graficoPlataformas) graficoPlataformas.destroy();
 
-            graficoPlataformas = new Chart(canvas, {
-                type: "doughnut",
-                data: {
-                    labels: ["Spotify", "Apple Music", "YouTube", "Amazon Music", "Outros"],
-                    datasets: [{
-                        data: [40, 25, 20, 10, 5],
-                        backgroundColor: ["#b185db", "#c8a2c8", "#d8a4b1", "#e6c1c8", "#f4a6bd"],
-                        borderColor: "transparent",
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: "bottom",
-                            labels: { color: "#555555" }
+            fetch("/avaliacoes-album/kpis/medias")
+                .then(function (resposta) {
+                    if (resposta.status == 204) {
+                        return [];
+                    }
+
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+
+                    throw new Error("Erro ao carregar medias de estrelas.");
+                })
+                .then(function (dados) {
+                    let labels = ["Sem avaliacoes"];
+                    let valores = [0];
+                    let totaisAvaliacoes = [0];
+                    let cores = ["#d8d8d8"];
+
+                    if (dados.length > 0) {
+                        labels = [];
+                        valores = [];
+                        totaisAvaliacoes = [];
+                        cores = [];
+
+                        for (let i = 0; i < dados.length; i++) {
+                            labels.push(dados[i].album_nome);
+                            valores.push(Number(dados[i].media_estrelas));
+                            totaisAvaliacoes.push(Number(dados[i].total_avaliacoes));
+                            cores.push(albuns[dados[i].album_nome] ? albuns[dados[i].album_nome].cor : "#ff8ca3");
                         }
                     }
-                }
-            });
+
+                    // Mostra a media global de estrelas que cada album recebeu.
+                    graficoPlataformas = new Chart(canvas, {
+                        type: "bar",
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: "Media de estrelas",
+                                data: valores,
+                                backgroundColor: cores,
+                                borderRadius: 8
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        afterLabel: function (contexto) {
+                                            return `${totaisAvaliacoes[contexto.dataIndex]} avaliacao(oes)`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 5,
+                                    ticks: { color: "#6c6c6c" }
+                                },
+                                x: {
+                                    ticks: {
+                                        color: "#4a4a4a",
+                                        maxRotation: 30,
+                                        minRotation: 0,
+                                        autoSkip: true
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
         }
     </script>
 </body>

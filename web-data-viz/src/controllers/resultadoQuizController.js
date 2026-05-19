@@ -87,9 +87,25 @@ function buscarUltimoGeralPorUsuario(req, res) {
     }
 }
 
+function buscarDistribuicaoCategoriasGeral(req, res) {
+    resultadoQuizModel.buscarDistribuicaoCategoriasGeral()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.json(resultado);
+            } else {
+                res.status(204).send();
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     salvar,
     buscarUltimoPorUsuario,
     salvarGeral,
-    buscarUltimoGeralPorUsuario
+    buscarUltimoGeralPorUsuario,
+    buscarDistribuicaoCategoriasGeral
 };

@@ -67,9 +67,38 @@ function buscarKpiAlbumMaisEstrelado() {
     return database.executar(instrucaoSql);
 }
 
+function buscarMediasPorAlbum() {
+    var instrucaoSql = `
+        SELECT
+            a.nome AS album_nome,
+            COALESCE(ROUND(AVG(aa.nota), 1), 0) AS media_estrelas,
+            COALESCE(SUM(aa.nota), 0) AS total_estrelas,
+            COUNT(aa.id) AS total_avaliacoes
+        FROM album a
+        LEFT JOIN avaliacao_album aa
+            ON aa.album_nome = a.nome
+        GROUP BY a.nome
+        ORDER BY FIELD(
+            a.nome,
+            'Yours Truly',
+            'My Everything',
+            'Dangerous Woman',
+            'Sweetener',
+            'Thank U, Next',
+            'Positions',
+            'Eternal Sunshine',
+            'Petal'
+        );
+    `;
+
+    console.log("Executando a instrucao SQL:\n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     salvarAvaliacao,
     removerAvaliacao,
     buscarAvaliacoesPorUsuario,
-    buscarKpiAlbumMaisEstrelado
+    buscarKpiAlbumMaisEstrelado,
+    buscarMediasPorAlbum
 };

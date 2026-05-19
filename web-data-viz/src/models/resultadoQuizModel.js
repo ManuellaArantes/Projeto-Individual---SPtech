@@ -81,9 +81,24 @@ function buscarUltimoResultadoGeralPorUsuario(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarDistribuicaoCategoriasGeral() {
+    var instrucaoSql = `
+        SELECT
+            categoria_destaque,
+            COUNT(*) AS total_resultados
+        FROM resultado_quiz_geral
+        GROUP BY categoria_destaque
+        ORDER BY total_resultados DESC, categoria_destaque ASC;
+    `;
+
+    console.log("Executando a instrucao SQL:\n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     salvarResultado,
     buscarUltimoResultadoPorUsuario,
     salvarResultadoGeral,
-    buscarUltimoResultadoGeralPorUsuario
+    buscarUltimoResultadoGeralPorUsuario,
+    buscarDistribuicaoCategoriasGeral
 };
