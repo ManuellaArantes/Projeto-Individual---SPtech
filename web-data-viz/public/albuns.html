@@ -37,8 +37,9 @@
         <section class="cabecalho-albuns">
             <h2>DISCOGRAFIA</h2>
             <p>Uma jornada musical pelos álbuns de estúdio da Ariana Grande.</p>
-            <div id="estatisticas-estrelas" style="margin-top: 15px; font-weight: bold; color: #555;">
+            <div id="estatisticas-estrelas">
                 Média das suas avaliações: <span id="media-estrelas">0.0</span> estrelas
+                <small id="status-estrelas">Entre na sua conta para salvar as estrelas.</small>
             </div>
         </section>
 
@@ -165,9 +166,86 @@
             return avaliacoesTemporarias;
         }
 
-        function salvarAvaliacao(idAlbum, nota) {
-            avaliacoesTemporarias[idAlbum] = nota;
-            calcularMediaEstrelas();
+        function obterNomeBanco(album) {
+            if (album.id === "thank-u-next") {
+                return "Thank U, Next";
+            }
+
+            if (album.id === "eternal-sunshine") {
+                return "Eternal Sunshine";
+            }
+
+            return album.nome;
+        }
+
+        function atualizarStatusEstrelas(texto) {
+            document.getElementById("status-estrelas").textContent = texto;
+        }
+
+        /* Busca as estrelas salvas para restaurar a avaliacao da usuaria logada. */
+        function carregarAvaliacoesDoBanco() {
+            if (!usuarioEstaLogado() || !sessionStorage.ID_USUARIO) {
+                atualizarStatusEstrelas("Entre na sua conta para salvar as estrelas.");
+                return Promise.resolve();
+            }
+
+            return fetch(`/avaliacoes-album/usuario/${sessionStorage.ID_USUARIO}`)
+                .then(function (resposta) {
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+
+                    throw new Error("Erro ao buscar avaliacoes.");
+                })
+                .then(function (avaliacoes) {
+                    avaliacoesTemporarias = {};
+
+                    for (let i = 0; i < avaliacoes.length; i++) {
+                        avaliacoesTemporarias[avaliacoes[i].album_nome] = Number(avaliacoes[i].nota);
+                    }
+
+                    atualizarStatusEstrelas("Suas estrelas estao salvas no banco de dados.");
+                    calcularMediaEstrelas();
+                })
+                .catch(function (erro) {
+                    console.log("Erro ao carregar avaliacoes:", erro);
+                    atualizarStatusEstrelas("Nao foi possivel carregar suas estrelas agora.");
+                });
+        }
+
+        /* Salva ou remove a nota do album no banco e atualiza a media local. */
+        function salvarAvaliacao(albumNome, nota) {
+            if (!usuarioEstaLogado() || !sessionStorage.ID_USUARIO) {
+                alert("Voce precisa estar logada para salvar estrelas.");
+                return Promise.resolve(false);
+            }
+
+            return fetch("/avaliacoes-album/salvar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: sessionStorage.ID_USUARIO,
+                    albumNomeServer: albumNome,
+                    notaServer: nota
+                })
+            })
+                .then(function (resposta) {
+                    if (!resposta.ok) {
+                        throw new Error("Erro ao salvar avaliacao.");
+                    }
+
+                    avaliacoesTemporarias[albumNome] = nota;
+                    calcularMediaEstrelas();
+                    atualizarStatusEstrelas("Suas estrelas estao salvas no banco de dados.");
+                    return true;
+                })
+                .catch(function (erro) {
+                    console.log("Erro ao salvar avaliacao:", erro);
+                    alert("Nao foi possivel salvar sua avaliacao agora.");
+                    return false;
+                });
         }
 
         function calcularMediaEstrelas() {
@@ -176,9 +254,9 @@
             
            // media de estrelas 
             for (let i = 0; i < albuns.length; i++) {
-                let idAlbum = albuns[i].id;
-                if (avaliacoesTemporarias[idAlbum] > 0) {
-                    soma = soma + avaliacoesTemporarias[idAlbum];
+                let nomeAlbum = obterNomeBanco(albuns[i]);
+                if (avaliacoesTemporarias[nomeAlbum] > 0) {
+                    soma = soma + avaliacoesTemporarias[nomeAlbum];
                     quantidade = quantidade + 1;
                 }
             }
@@ -198,7 +276,8 @@
 
             for (let i = 0; i < albuns.length; i++) {
                 let album = albuns[i];
-                let notaAtual = avaliacoes[album.id] || 0;
+                let nomeBanco = obterNomeBanco(album);
+                let notaAtual = avaliacoes[nomeBanco] || 0;
                 let card = document.createElement("article");
 
                 card.className = "caixa-album";
@@ -248,7 +327,7 @@
                 listaAlbuns.appendChild(card);
 
                 let estrelas = card.querySelector(".estrelas");
-                renderizarEstrelas(estrelas, album.id, notaAtual, album.corDestaque);
+                renderizarEstrelas(estrelas, nomeBanco, notaAtual, album.corDestaque);
             }
 
             atualizarFundoPorAlbum();
@@ -272,11 +351,12 @@
             }
         }
 
-        function renderizarEstrelas(container, idAlbum, notaAtual, corDestaque) {
+        function renderizarEstrelas(container, albumNome, notaAtual, corDestaque) {
             container.innerHTML = "";
 
             for (let estrela = 1; estrela <= 5; estrela++) {
                 let botao = document.createElement("button");
+                botao.type = "button";
                 botao.innerHTML = "&#9733;";
                 if (estrela <= notaAtual) {
                     botao.style.color = corDestaque;
@@ -286,30 +366,31 @@
                     botao.className = "estrela";
                 }
                 botao.onclick = function () {
-                    definirNota(container, idAlbum, estrela, corDestaque);
+                    definirNota(container, albumNome, estrela, corDestaque);
                 };
                 container.appendChild(botao);
             }
         }
 
-        function definirNota(container, idAlbum, notaClicada, corDestaque) {
+        function definirNota(container, albumNome, notaClicada, corDestaque) {
             let avaliacoes = obterAvaliacoesSalvas();
-            let notaAtual = avaliacoes[idAlbum] || 0;
+            let notaAtual = avaliacoes[albumNome] || 0;
             let novaNota = notaAtual === notaClicada ? 0 : notaClicada;
 
-            salvarAvaliacao(idAlbum, novaNota);
-            renderizarEstrelas(container, idAlbum, novaNota, corDestaque);
+            salvarAvaliacao(albumNome, novaNota).then(function (salvou) {
+                if (salvou) {
+                    renderizarEstrelas(container, albumNome, novaNota, corDestaque);
+                }
+            });
         }
 
-        renderizarAlbuns();
+        carregarAvaliacoesDoBanco().then(function () {
+            renderizarAlbuns();
+            calcularMediaEstrelas();
+        });
     </script>
 </body>
 
 </html>
-
-
-
-
-
 
 

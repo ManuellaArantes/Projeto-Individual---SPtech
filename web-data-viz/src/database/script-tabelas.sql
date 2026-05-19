@@ -1,12 +1,7 @@
--- Banco de dados simples para o projeto InfoAriana
--- Tabelas usadas para cadastro, albuns e resultado do quiz
+CREATE DATABASE ariana;
+USE ariana;
 
-DROP DATABASE IF EXISTS infoariana;
-CREATE DATABASE infoariana;
 
-USE infoariana;
-
--- Tabela de usuarios
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(80) NOT NULL,
@@ -15,7 +10,7 @@ CREATE TABLE usuario (
     dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de albuns usados no site e no quiz
+
 CREATE TABLE album (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(40) NOT NULL UNIQUE,
@@ -30,9 +25,9 @@ INSERT INTO album (nome, ano_lancamento, musica_destaque) VALUES
     ('Sweetener', 2018, 'no tears left to cry'),
     ('Thank U, Next', 2019, '7 rings'),
     ('Positions', 2020, 'positions'),
-    ('Eternal Sunshine', 2024, 'we can''t be friends');
+    ('Eternal Sunshine', 2024, 'we can''t be friends'),
+    ('Petal', 2026, 'Em breve');
 
--- Tabela para salvar os resultados do quiz de cada usuario
 CREATE TABLE resultado_quiz (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fk_usuario INT NOT NULL,
@@ -47,4 +42,28 @@ CREATE TABLE resultado_quiz (
     dt_resultado DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
     FOREIGN KEY (album_final) REFERENCES album(nome)
+);
+
+
+CREATE TABLE resultado_quiz_geral (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_usuario INT NOT NULL,
+    acertos INT NOT NULL,
+    total_perguntas INT NOT NULL,
+    categoria_destaque VARCHAR(40) NOT NULL,
+    dt_resultado DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+);
+
+
+CREATE TABLE avaliacao_album (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_usuario INT NOT NULL,
+    album_nome VARCHAR(40) NOT NULL,
+    nota INT NOT NULL,
+    dt_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (album_nome) REFERENCES album(nome),
+    UNIQUE KEY uk_usuario_album (fk_usuario, album_nome),
+    CONSTRAINT chk_nota_album CHECK (nota BETWEEN 1 AND 5)
 );

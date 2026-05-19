@@ -46,7 +46,50 @@ function buscarUltimoPorUsuario(req, res) {
     }
 }
 
+function salvarGeral(req, res) {
+    var idUsuario = req.body.idUsuarioServer;
+    var acertos = req.body.acertosServer;
+    var totalPerguntas = req.body.totalPerguntasServer;
+    var categoriaDestaque = req.body.categoriaDestaqueServer;
+
+    if (idUsuario == undefined || acertos == undefined || totalPerguntas == undefined || categoriaDestaque == undefined) {
+        res.status(400).send("Dados do quiz geral estao incompletos.");
+    } else {
+        resultadoQuizModel.salvarResultadoGeral(idUsuario, acertos, totalPerguntas, categoriaDestaque)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
+function buscarUltimoGeralPorUsuario(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("idUsuario esta undefined!");
+    } else {
+        resultadoQuizModel.buscarUltimoResultadoGeralPorUsuario(idUsuario)
+            .then(function (resultado) {
+                if (resultado.length > 0) {
+                    res.json(resultado[0]);
+                } else {
+                    res.status(204).send();
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
 module.exports = {
     salvar,
-    buscarUltimoPorUsuario
+    buscarUltimoPorUsuario,
+    salvarGeral,
+    buscarUltimoGeralPorUsuario
 };

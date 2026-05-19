@@ -287,7 +287,7 @@
     border: 2px solid #333;
 }
 
-/* Cabeçalho da seção de favoritos */
+/*Cabeçalho da seção de favoritos */
 .topo-favoritos {
     display: flex;
     justify-content: space-between;

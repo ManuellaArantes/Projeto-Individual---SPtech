@@ -32,37 +32,101 @@
     </header>
 
     <main class="pagina-quiz">
-        <!-- apresentacao do quiz -->
-        <section class="cabecalho-quiz">
-            <p class="rotulo-quiz">Quiz de personalidade</p>
-            <h2>Qual album da Ariana Grande combina com voce?</h2>
+        <section class="cabecalho-quiz tela-escolha-quiz">
+            <p class="rotulo-quiz">Central de quizzes</p>
+            <h2>Escolha qual quiz voce quer responder</h2>
             <p>
-                Responda as 10 perguntas e descubra qual era da Ariana mais combina com sua forma
-                de amar, sentir, reagir e crescer.
+                Cada card abre um quiz diferente. Se voce ja respondeu, ele aparece como feito,
+                mas ainda pode ser respondido novamente.
             </p>
         </section>
 
-        <!-- onde as perguntas serao criadas pelo Js -->
-        <section class="caixa-quiz">
-            <div class="topo-quiz">
-                <h3>Responda com sinceridade</h3>
-                <span class="total-quiz">10 perguntas</span>
-            </div>
+        <section class="grade-escolha-quiz tela-escolha-quiz">
+            <button class="card-escolha-quiz" type="button" onclick="abrirQuiz('personalidade')">
+                <span class="status-quiz" id="status-personalidade">Verificando...</span>
+                <strong>Quiz de personalidade</strong>
+                <p>Descubra qual album da Ariana Grande combina com voce.</p>
+                <small>10 perguntas sobre sentimentos, estilo e fases da vida.</small>
+            </button>
 
-            <form class="formulario-quiz"></form>
-
-            <div class="botoes-quiz">
-                <button class="botao" type="button" onclick="finalizarQuiz()">Finalizar quiz</button>
-                <button class="botao botao-secundario" type="button" onclick="reiniciarQuiz()">Refazer</button>
-            </div>
+            <button class="card-escolha-quiz" type="button" onclick="abrirQuiz('geral')">
+                <span class="status-quiz" id="status-geral">Verificando...</span>
+                <strong>Quiz geral</strong>
+                <p>Teste o quanto voce sabe sobre a carreira da Ariana.</p>
+                <small>10 perguntas sobre albuns, musicas, premios e personagens.</small>
+            </button>
         </section>
 
-        <!-- onde o resultado final aparece -->
-        <section class="resultado-quiz oculto">
-            <p class="resultado-kicker">Resultado salvo</p>
-            <h3 class="resultado-album"></h3>
-            <p class="resultado-significado"></p>
-            <a class="botao botao-dashboard" href="./dashboard/cards.html">Ver resultado</a>
+        <section class="area-quiz area-personalidade oculto">
+            <section class="cabecalho-quiz">
+                <p class="rotulo-quiz">Quiz de personalidade</p>
+                <h2>Qual album da Ariana Grande combina com voce?</h2>
+                <p>
+                    Responda as 10 perguntas e descubra qual era da Ariana mais combina com sua forma
+                    de amar, sentir, reagir e crescer.
+                </p>
+            </section>
+
+            <section class="caixa-quiz">
+                <div class="topo-quiz">
+                    <h3>Responda com sinceridade</h3>
+                    <span class="total-quiz">10 perguntas</span>
+                </div>
+
+                <form class="formulario-quiz"></form>
+
+                <div class="botoes-quiz">
+                    <button class="botao" type="button" onclick="finalizarQuiz()">Finalizar quiz</button>
+                    <button class="botao botao-secundario" type="button" onclick="voltarParaEscolha()">Voltar aos cards</button>
+                </div>
+            </section>
+
+            <section class="resultado-quiz resultado-personalidade oculto">
+                <p class="resultado-kicker">Resultado salvo</p>
+                <h3 class="resultado-album"></h3>
+                <p class="resultado-significado"></p>
+                <div class="botoes-quiz botoes-resultado">
+                    <button class="botao botao-secundario" type="button" onclick="reiniciarQuiz()">Refazer</button>
+                    <a class="botao botao-dashboard" href="./dashboard/cards.html">Ver resultado na dash</a>
+                    <button class="botao botao-secundario" type="button" onclick="abrirQuiz('geral')">Fazer o outro quiz</button>
+                </div>
+            </section>
+        </section>
+
+        <section class="area-quiz area-geral oculto">
+            <section class="cabecalho-quiz">
+                <p class="rotulo-quiz">Quiz geral</p>
+                <h2>Quanto voce sabe sobre a Ariana Grande?</h2>
+                <p>
+                    Responda mais 10 perguntas sobre carreira, albuns, musicas e premios.
+                    Esse resultado alimenta as KPIs da dashboard.
+                </p>
+            </section>
+
+            <section class="caixa-quiz">
+                <div class="topo-quiz">
+                    <h3>Teste seus conhecimentos</h3>
+                    <span class="total-quiz">10 perguntas</span>
+                </div>
+
+                <form class="formulario-quiz-geral"></form>
+
+                <div class="botoes-quiz">
+                    <button class="botao" type="button" onclick="finalizarQuizGeral()">Finalizar quiz geral</button>
+                    <button class="botao botao-secundario" type="button" onclick="voltarParaEscolha()">Voltar aos cards</button>
+                </div>
+            </section>
+
+            <section class="resultado-quiz resultado-quiz-geral oculto">
+                <p class="resultado-kicker">KPI atualizada</p>
+                <h3 class="resultado-geral-titulo"></h3>
+                <p class="resultado-geral-texto"></p>
+                <div class="botoes-quiz botoes-resultado">
+                    <button class="botao botao-secundario" type="button" onclick="reiniciarQuizGeral()">Refazer</button>
+                    <a class="botao botao-dashboard" href="./dashboard/cards.html">Ver resultado na dash</a>
+                    <button class="botao botao-secundario" type="button" onclick="abrirQuiz('personalidade')">Fazer o outro quiz</button>
+                </div>
+            </section>
         </section>
     </main>
 
@@ -167,6 +231,110 @@
             }
         ];
 
+        /* Perguntas do quiz geral que alimenta as KPIs da dashboard. */
+        let perguntasGerais = [
+            {
+                titulo: "1. Em que ano Ariana Grande lancou o album Yours Truly?",
+                categoria: "Discografia",
+                opcoes: [
+                    { letra: "A", texto: "2011", correta: false },
+                    { letra: "B", texto: "2013", correta: true },
+                    { letra: "C", texto: "2016", correta: false },
+                    { letra: "D", texto: "2019", correta: false }
+                ]
+            },
+            {
+                titulo: "2. Qual personagem Ariana interpretou em Victorious?",
+                categoria: "Carreira",
+                opcoes: [
+                    { letra: "A", texto: "Cat Valentine", correta: true },
+                    { letra: "B", texto: "Jade West", correta: false },
+                    { letra: "C", texto: "Tori Vega", correta: false },
+                    { letra: "D", texto: "Trina Vega", correta: false }
+                ]
+            },
+            {
+                titulo: "3. Qual album venceu Grammy de Best Pop Vocal Album?",
+                categoria: "Premios",
+                opcoes: [
+                    { letra: "A", texto: "Sweetener", correta: true },
+                    { letra: "B", texto: "Positions", correta: false },
+                    { letra: "C", texto: "My Everything", correta: false },
+                    { letra: "D", texto: "Yours Truly", correta: false }
+                ]
+            },
+            {
+                titulo: "4. A musica 7 rings pertence a qual album?",
+                categoria: "Discografia",
+                opcoes: [
+                    { letra: "A", texto: "Dangerous Woman", correta: false },
+                    { letra: "B", texto: "thank u, next", correta: true },
+                    { letra: "C", texto: "Sweetener", correta: false },
+                    { letra: "D", texto: "Eternal Sunshine", correta: false }
+                ]
+            },
+            {
+                titulo: "5. Qual musica ficou conhecida como single de estreia com Mac Miller?",
+                categoria: "Musicas",
+                opcoes: [
+                    { letra: "A", texto: "Problem", correta: false },
+                    { letra: "B", texto: "The Way", correta: true },
+                    { letra: "C", texto: "Into You", correta: false },
+                    { letra: "D", texto: "positions", correta: false }
+                ]
+            },
+            {
+                titulo: "6. Qual album de 2024 trouxe we can't be friends?",
+                categoria: "Discografia",
+                opcoes: [
+                    { letra: "A", texto: "Eternal Sunshine", correta: true },
+                    { letra: "B", texto: "Sweetener", correta: false },
+                    { letra: "C", texto: "My Everything", correta: false },
+                    { letra: "D", texto: "Positions", correta: false }
+                ]
+            },
+            {
+                titulo: "7. Qual musica faz parte do album Dangerous Woman?",
+                categoria: "Musicas",
+                opcoes: [
+                    { letra: "A", texto: "Into You", correta: true },
+                    { letra: "B", texto: "Baby I", correta: false },
+                    { letra: "C", texto: "34+35", correta: false },
+                    { letra: "D", texto: "ghostin", correta: false }
+                ]
+            },
+            {
+                titulo: "8. Em Wicked, Ariana interpreta qual personagem?",
+                categoria: "Carreira",
+                opcoes: [
+                    { letra: "A", texto: "Elphaba", correta: false },
+                    { letra: "B", texto: "Glinda", correta: true },
+                    { letra: "C", texto: "Nessarose", correta: false },
+                    { letra: "D", texto: "Madame Morrible", correta: false }
+                ]
+            },
+            {
+                titulo: "9. Qual album trouxe a faixa no tears left to cry?",
+                categoria: "Musicas",
+                opcoes: [
+                    { letra: "A", texto: "Sweetener", correta: true },
+                    { letra: "B", texto: "Yours Truly", correta: false },
+                    { letra: "C", texto: "Dangerous Woman", correta: false },
+                    { letra: "D", texto: "Positions", correta: false }
+                ]
+            },
+            {
+                titulo: "10. Em que ano o album thank u, next foi lancado?",
+                categoria: "Discografia",
+                opcoes: [
+                    { letra: "A", texto: "2017", correta: false },
+                    { letra: "B", texto: "2018", correta: false },
+                    { letra: "C", texto: "2019", correta: true },
+                    { letra: "D", texto: "2020", correta: false }
+                ]
+            }
+        ];
+
   
         let albuns = {
             YT: {
@@ -206,6 +374,97 @@
             }
         };
 
+        let quizzesFeitos = {
+            personalidade: false,
+            geral: false
+        };
+
+        function atualizarStatusCard(tipoQuiz, feito) {
+            let status = document.getElementById(`status-${tipoQuiz}`);
+
+            quizzesFeitos[tipoQuiz] = feito;
+            status.textContent = feito ? "Feito" : "Pendente";
+            status.classList.toggle("feito", feito);
+        }
+
+        function verificarQuizFeito(url) {
+            return fetch(url)
+                .then(function (resposta) {
+                    if (resposta.status == 204) {
+                        return false;
+                    }
+
+                    if (resposta.ok) {
+                        return true;
+                    }
+
+                    throw new Error("Erro ao verificar quiz.");
+                })
+                .catch(function () {
+                    return false;
+                });
+        }
+
+        /* Consulta o banco para marcar quais quizzes ja foram respondidos. */
+        function carregarStatusQuizzes() {
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            if (!idUsuario) {
+                return;
+            }
+
+            verificarQuizFeito(`/resultados-quiz/ultimo/${idUsuario}`).then(function (feito) {
+                atualizarStatusCard("personalidade", feito);
+            });
+
+            verificarQuizFeito(`/resultados-quiz/geral/ultimo/${idUsuario}`).then(function (feito) {
+                atualizarStatusCard("geral", feito);
+            });
+        }
+
+        function esconderTodasAsTelas() {
+            let telasEscolha = document.querySelectorAll(".tela-escolha-quiz");
+            let areasQuiz = document.querySelectorAll(".area-quiz");
+
+            for (let i = 0; i < telasEscolha.length; i++) {
+                telasEscolha[i].classList.add("oculto");
+            }
+
+            for (let i = 0; i < areasQuiz.length; i++) {
+                areasQuiz[i].classList.add("oculto");
+            }
+        }
+
+        function abrirQuiz(tipoQuiz) {
+            esconderTodasAsTelas();
+
+            if (tipoQuiz === "personalidade") {
+                document.querySelector(".area-personalidade").classList.remove("oculto");
+                document.querySelector(".resultado-personalidade").classList.add("oculto");
+            } else {
+                document.querySelector(".area-geral").classList.remove("oculto");
+                document.querySelector(".resultado-quiz-geral").classList.add("oculto");
+            }
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function voltarParaEscolha() {
+            let telasEscolha = document.querySelectorAll(".tela-escolha-quiz");
+            let areasQuiz = document.querySelectorAll(".area-quiz");
+
+            for (let i = 0; i < areasQuiz.length; i++) {
+                areasQuiz[i].classList.add("oculto");
+            }
+
+            for (let i = 0; i < telasEscolha.length; i++) {
+                telasEscolha[i].classList.remove("oculto");
+            }
+
+            carregarStatusQuizzes();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
       
         function renderizarPerguntas() {
             let formulario = document.querySelector(".formulario-quiz");
@@ -232,6 +491,40 @@
                     alternativa.className = "opcao";
                     alternativa.innerHTML = `
                         <input type="radio" name="pergunta_${i}" value="${j}">
+                        <span><strong>${opcao.letra})</strong> ${opcao.texto}</span>
+                    `;
+
+                    opcoesContainer.appendChild(alternativa);
+                }
+            }
+        }
+
+        /* Cria em tela os radios do quiz geral sem misturar com o quiz de personalidade. */
+        function renderizarPerguntasGerais() {
+            let formulario = document.querySelector(".formulario-quiz-geral");
+            formulario.innerHTML = "";
+
+            for (let i = 0; i < perguntasGerais.length; i++) {
+                let pergunta = perguntasGerais[i];
+                let bloco = document.createElement("article");
+
+                bloco.className = "cartao-pergunta";
+                bloco.innerHTML = `
+                    <h4>${pergunta.titulo}</h4>
+                    <div class="opcoes-pergunta"></div>
+                `;
+
+                formulario.appendChild(bloco);
+
+                let opcoesContainer = bloco.querySelector(".opcoes-pergunta");
+
+                for (let j = 0; j < pergunta.opcoes.length; j++) {
+                    let opcao = pergunta.opcoes[j];
+                    let alternativa = document.createElement("label");
+
+                    alternativa.className = "opcao";
+                    alternativa.innerHTML = `
+                        <input type="radio" name="quiz_geral_${i}" value="${j}">
                         <span><strong>${opcao.letra})</strong> ${opcao.texto}</span>
                     `;
 
@@ -324,13 +617,14 @@
            // botao para o usuario abrir a dashboard.
         
         function mostrarResultado() {
-            let resultado = document.querySelector(".resultado-quiz");
+            let resultado = document.querySelector(".resultado-personalidade");
             let titulo = document.querySelector(".resultado-album");
             let significado = document.querySelector(".resultado-significado");
 
             titulo.textContent = "Quiz finalizado!";
-            significado.textContent = "Seu resultado foi salvo. Clique no botao abaixo para ver a dashboard.";
+            significado.textContent = "Seu resultado foi salvo. Agora voce pode refazer, ver a dashboard ou responder o outro quiz.";
 
+            atualizarStatusCard("personalidade", true);
             resultado.classList.remove("oculto");
             resultado.scrollIntoView({ behavior: "smooth", block: "start" });
         }
@@ -361,6 +655,89 @@
             });
         }
 
+        /* Calcula acertos e identifica a categoria em que a usuaria foi melhor. */
+        function calcularResultadoQuizGeral() {
+            let acertos = 0;
+            let acertosPorCategoria = {};
+
+            for (let i = 0; i < perguntasGerais.length; i++) {
+                let respostaMarcada = document.querySelector(`input[name="quiz_geral_${i}"]:checked`);
+
+                if (!respostaMarcada) {
+                    return null;
+                }
+
+                let pergunta = perguntasGerais[i];
+                let opcaoEscolhida = pergunta.opcoes[Number(respostaMarcada.value)];
+
+                if (opcaoEscolhida.correta) {
+                    acertos = acertos + 1;
+
+                    if (!acertosPorCategoria[pergunta.categoria]) {
+                        acertosPorCategoria[pergunta.categoria] = 0;
+                    }
+
+                    acertosPorCategoria[pergunta.categoria] = acertosPorCategoria[pergunta.categoria] + 1;
+                }
+            }
+
+            return {
+                acertos: acertos,
+                totalPerguntas: perguntasGerais.length,
+                categoriaDestaque: descobrirCategoriaDestaque(acertosPorCategoria)
+            };
+        }
+
+        function descobrirCategoriaDestaque(acertosPorCategoria) {
+            let categorias = Object.keys(acertosPorCategoria);
+            let categoriaDestaque = "Revisar carreira";
+            let maiorPontuacao = 0;
+
+            for (let i = 0; i < categorias.length; i++) {
+                let categoria = categorias[i];
+
+                if (acertosPorCategoria[categoria] > maiorPontuacao) {
+                    maiorPontuacao = acertosPorCategoria[categoria];
+                    categoriaDestaque = categoria;
+                }
+            }
+
+            return categoriaDestaque;
+        }
+
+        /* Salva o quiz geral para os cards da dashboard ficarem dinamicos. */
+        function salvarQuizGeralNoBanco(resultado) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            return fetch("/resultados-quiz/geral/salvar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: idUsuario,
+                    acertosServer: resultado.acertos,
+                    totalPerguntasServer: resultado.totalPerguntas,
+                    categoriaDestaqueServer: resultado.categoriaDestaque
+                })
+            }).catch(function (erro) {
+                console.log("Erro ao salvar quiz geral:", erro);
+            });
+        }
+
+        function mostrarResultadoQuizGeral(resultado) {
+            let resultadoQuiz = document.querySelector(".resultado-quiz-geral");
+            let titulo = document.querySelector(".resultado-geral-titulo");
+            let texto = document.querySelector(".resultado-geral-texto");
+
+            titulo.textContent = `${resultado.acertos}/${resultado.totalPerguntas} acertos`;
+            texto.textContent = `Sua melhor categoria foi ${resultado.categoriaDestaque}. Agora voce pode refazer, ver a dashboard ou responder o outro quiz.`;
+
+            atualizarStatusCard("geral", true);
+            resultadoQuiz.classList.remove("oculto");
+            resultadoQuiz.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
         
            // validar e finalizar o quiz.
         
@@ -379,12 +756,25 @@
             });
         }
 
+        function finalizarQuizGeral() {
+            let resultado = calcularResultadoQuizGeral();
+
+            if (!resultado) {
+                alert("Responda todas as perguntas do quiz geral antes de finalizar.");
+                return;
+            }
+
+            salvarQuizGeralNoBanco(resultado).then(function () {
+                mostrarResultadoQuizGeral(resultado);
+            });
+        }
+
        
             // serve p limpara as respostas
        
         function reiniciarQuiz() {
-            let radios = document.querySelectorAll('input[type="radio"]');
-            let resultado = document.querySelector(".resultado-quiz");
+            let radios = document.querySelectorAll('input[name^="pergunta_"]');
+            let resultado = document.querySelector(".resultado-personalidade");
 
 
             for (let i = 0; i < radios.length; i++) {
@@ -394,10 +784,24 @@
             // esconde os rsultados 
             resultado.classList.add("oculto");
             // serve para voltar para o topo
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            document.querySelector(".area-personalidade").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function reiniciarQuizGeral() {
+            let radios = document.querySelectorAll('input[name^="quiz_geral_"]');
+            let resultado = document.querySelector(".resultado-quiz-geral");
+
+            for (let i = 0; i < radios.length; i++) {
+                radios[i].checked = false;
+            }
+
+            resultado.classList.add("oculto");
+            document.querySelector(".area-geral").scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
         renderizarPerguntas();
+        renderizarPerguntasGerais();
+        carregarStatusQuizzes();
     </script>
 </body>
 

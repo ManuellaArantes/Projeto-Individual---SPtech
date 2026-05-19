@@ -46,27 +46,27 @@
         <!-- Cards do inicio -->
         <section class="grade-metricas">
             <article class="cartao-metrica">
-                <span>TOTAL DE STREAMS</span>
-                <strong>85B+</strong>
-                <p>+12% no último ciclo</p>
+                <span>ACERTOS NO QUIZ GERAL</span>
+                <strong id="kpi-acertos">-</strong>
+                <p id="kpi-acertos-legenda">Responda o quiz geral</p>
             </article>
 
             <article class="cartao-metrica">
-                <span>OUVINTES MENSAIS</span>
-                <strong>380M+</strong>
-                <p>+8% em plataformas</p>
+                <span>MELHOR CATEGORIA</span>
+                <strong id="kpi-categoria" class="nome-kpi">-</strong>
+                <p id="kpi-categoria-legenda">Baseada nos acertos</p>
             </article>
 
             <article class="cartao-metrica">
-                <span>PRÊMIOS TOTAIS</span>
-                <strong>470+</strong>
-                <p>Reconhecimento mundial</p>
+                <span>ALBUM MAIS ESTRELADO</span>
+                <strong id="kpi-album-estrelado" class="nome-kpi">-</strong>
+                <p id="kpi-album-legenda">Aguardando avaliacoes</p>
             </article>
 
             <article class="cartao-metrica">
-                <span>ÁLBUNS DE ESTÚDIO</span>
-                <strong>7</strong>
-                <p>Último: 2024</p>
+                <span>MEDIA DESSE ALBUM</span>
+                <strong id="kpi-media-estrelas">-</strong>
+                <p id="kpi-media-legenda">Estrelas recebidas</p>
             </article>
         </section>
 
@@ -152,7 +152,7 @@
     </footer>
 
     <script>
-        /* Mapa visual dos álbuns para exibir capa e cor no resultado do quiz. */
+        // Mapa visual dos álbuns para exibir capa e cor no resultado do quiz. 
         let albuns = {
             "Yours Truly": { capa: "../img/Yours Truly.jpg", cor: "#f4a6bd" },
             "My Everything": { capa: "../img/My Everything.jpg", cor: "#9c9ca8" },
@@ -178,16 +178,91 @@
         let graficoGeneros = null;
         let graficoPlataformas = null;
 
-        /* Inicializa a dashboard com sessão, resultado do quiz e gráficos gerais. */
+        // Inicializa a dashboard 
         function carregarDashboard() {
             validarSessao();
+            carregarKpisQuizGeral();
+            carregarKpisAvaliacoes();
             carregarUltimoResultado();
             montarGraficoVendas();
             montarGraficoGeneros();
             montarGraficoPlataformas();
         }
 
-        /* Busca o último quiz do usuário logado e atualiza os componentes da tela. */
+        // cards do quiz GERAL com o ÚLTIMO resultado salvo. 
+        function carregarKpisQuizGeral() {
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            fetch(`/resultados-quiz/geral/ultimo/${idUsuario}`)
+                .then(function (resposta) {
+                    if (resposta.status == 204) {
+                        mostrarKpisQuizGeralVazias();
+                        return null;
+                    }
+
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+
+                    throw new Error("Erro ao carregar quiz geral.");
+                })
+                .then(function (dados) {
+                    if (dados) {
+                        document.getElementById("kpi-acertos").textContent = `${dados.acertos}/${dados.total_perguntas}`;
+                        document.getElementById("kpi-acertos-legenda").textContent = `${dados.percentual}% de aproveitamento`;
+                        document.getElementById("kpi-categoria").textContent = dados.categoria_destaque;
+                        document.getElementById("kpi-categoria-legenda").textContent = "Categoria com mais respostas certas";
+                    }
+                })
+                .catch(function () {
+                    mostrarKpisQuizGeralVazias();
+                });
+        }
+
+        function mostrarKpisQuizGeralVazias() {
+            document.getElementById("kpi-acertos").textContent = "-";
+            document.getElementById("kpi-acertos-legenda").textContent = "Responda o quiz geral";
+            document.getElementById("kpi-categoria").textContent = "-";
+            document.getElementById("kpi-categoria-legenda").textContent = "Baseada nos acertos";
+        }
+
+        // Busca a avaliacao mais alta entre os albuns 
+        //KPI
+        function carregarKpisAvaliacoes() {
+            fetch("/avaliacoes-album/kpis/top-album")
+                .then(function (resposta) {
+                    if (resposta.status == 204) {
+                        mostrarKpisAvaliacoesVazias();
+                        return null;
+                    }
+
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+
+                    throw new Error("Erro ao carregar avaliacoes.");
+                })
+                .then(function (dados) {
+                    if (dados) {
+                        document.getElementById("kpi-album-estrelado").textContent = dados.album_nome;
+                        document.getElementById("kpi-album-legenda").textContent = `${dados.total_estrelas} estrelas acumuladas`;
+                        document.getElementById("kpi-media-estrelas").textContent = Number(dados.media_estrelas).toFixed(1);
+                        document.getElementById("kpi-media-legenda").textContent = `${dados.total_avaliacoes} avaliacao(oes)`;
+                    }
+                })
+                .catch(function () {
+                    mostrarKpisAvaliacoesVazias();
+                });
+        }
+
+        function mostrarKpisAvaliacoesVazias() {
+            document.getElementById("kpi-album-estrelado").textContent = "-";
+            document.getElementById("kpi-album-legenda").textContent = "Aguardando avaliacoes";
+            document.getElementById("kpi-media-estrelas").textContent = "-";
+            document.getElementById("kpi-media-legenda").textContent = "Estrelas recebidas";
+        }
+
+        // Busca o último quiz do usuário logado e atualiza a dash com as informçãoes 
         function carregarUltimoResultado() {
             let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -372,7 +447,3 @@
 </body>
 
 </html>
-
-
-
-

@@ -11,4 +11,12 @@ router.get("/ultimo/:idUsuario", function (req, res) {
     resultadoQuizController.buscarUltimoPorUsuario(req, res);
 });
 
+router.post("/geral/salvar", function (req, res) {
+    resultadoQuizController.salvarGeral(req, res);
+});
+
+router.get("/geral/ultimo/:idUsuario", function (req, res) {
+    resultadoQuizController.buscarUltimoGeralPorUsuario(req, res);
+});
+
 module.exports = router;

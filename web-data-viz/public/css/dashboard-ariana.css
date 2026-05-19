@@ -83,6 +83,13 @@
     color: #111111;
     font-size: clamp(2.2rem, 5vw, 3.2rem);
     font-weight: 900;
+    line-height: 1;
+    overflow-wrap: anywhere;
+}
+
+.cartao-metrica strong.nome-kpi {
+    font-size: clamp(1.45rem, 3vw, 2.2rem);
+    line-height: 1.08;
 }
 
 .cartao-metrica p {
